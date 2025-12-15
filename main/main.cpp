@@ -1,6 +1,6 @@
-#include "system.h"
-#include "user_data.h"
 #include "create_user.h"
+#include <iostream>
+using namespace std;
 
 int main(){
     CreateUserPage();

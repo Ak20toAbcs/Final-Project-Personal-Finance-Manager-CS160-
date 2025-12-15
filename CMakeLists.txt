@@ -1,0 +1,31 @@
+cmake_minimum_required(VERSION 3.10)
+
+# Đặt tên dự án của bạn
+project(MyApplication)
+
+# 1. Cấu hình C++ chuẩn (ví dụ C++ 17)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# 2. Thêm đường dẫn folder chứa file .h
+# Dòng này giúp bạn #include "user_data.h" thoải mái mà không cần ../
+file(GLOB_RECURSE SOURCES 
+    "main/*.cpp"
+    "user_data/*.cpp"
+    "database/*.cpp"
+    "create_user/*.cpp"
+    "system/*.cpp"
+    # Thêm folder khác vào đây nếu có
+)
+
+# 3. TỰ ĐỘNG tìm tất cả file .cpp trong toàn bộ dự án
+# Lệnh này quét mọi ngóc ngách folder con để tìm file .cpp
+include_directories(
+    ${CMAKE_SOURCE_DIR}/create_user
+    ${CMAKE_SOURCE_DIR}/system
+    ${CMAKE_SOURCE_DIR}/user_data    
+
+)
+
+# 4. Tạo file chạy (Executable) từ danh sách file vừa tìm được
+add_executable(MyApp ${SOURCES})

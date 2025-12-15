@@ -19,7 +19,7 @@ void CreateUserPage() {
     cin.getline(userName, 51);
 
     ofstream fout;
-    fout.open("D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/data/user_name.bin", ios::binary);
+    fout.open("D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/database/user_name.bin", ios::binary);
    
     if (fout.is_open()) {
     fout.write(userName, 51);

@@ -1,0 +1,26 @@
+[
+{
+  "directory": "D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/MyApp.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\MyApp.dir\\create_user\\create_user.cpp.obj -c D:\\appdev\\lab_project\\Final-Project-Personal-Finance-Manager-CS160-\\create_user\\create_user.cpp",
+  "file": "D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/create_user/create_user.cpp",
+  "output": "CMakeFiles/MyApp.dir/create_user/create_user.cpp.obj"
+},
+{
+  "directory": "D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/MyApp.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\MyApp.dir\\main\\main.cpp.obj -c D:\\appdev\\lab_project\\Final-Project-Personal-Finance-Manager-CS160-\\main\\main.cpp",
+  "file": "D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/main/main.cpp",
+  "output": "CMakeFiles/MyApp.dir/main/main.cpp.obj"
+},
+{
+  "directory": "D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/MyApp.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\MyApp.dir\\system\\system.cpp.obj -c D:\\appdev\\lab_project\\Final-Project-Personal-Finance-Manager-CS160-\\system\\system.cpp",
+  "file": "D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/system/system.cpp",
+  "output": "CMakeFiles/MyApp.dir/system/system.cpp.obj"
+},
+{
+  "directory": "D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/MyApp.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\MyApp.dir\\user_data\\user_data.cpp.obj -c D:\\appdev\\lab_project\\Final-Project-Personal-Finance-Manager-CS160-\\user_data\\user_data.cpp",
+  "file": "D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/user_data/user_data.cpp",
+  "output": "CMakeFiles/MyApp.dir/user_data/user_data.cpp.obj"
+}
+]
