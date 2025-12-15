@@ -4,4 +4,4 @@
 void ClearScreen();
 // dùng để ngăn cách các trang
 
-extern string borderLine;
+// extern string borderLine;
