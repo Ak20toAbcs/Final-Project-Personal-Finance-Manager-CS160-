@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 void ClearScreen();
 // dùng để ngăn cách các trang
-extern char borderLine[51];
+extern string borderLine;

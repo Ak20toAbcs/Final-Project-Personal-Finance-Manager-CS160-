@@ -200,30 +200,6 @@ system/system.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyApp.dir\build.make CMakeFiles/MyApp.dir/system/system.cpp.s
 .PHONY : system/system.cpp.s
 
-user_data/user_data.obj: user_data/user_data.cpp.obj
-.PHONY : user_data/user_data.obj
-
-# target to build an object file
-user_data/user_data.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyApp.dir\build.make CMakeFiles/MyApp.dir/user_data/user_data.cpp.obj
-.PHONY : user_data/user_data.cpp.obj
-
-user_data/user_data.i: user_data/user_data.cpp.i
-.PHONY : user_data/user_data.i
-
-# target to preprocess a source file
-user_data/user_data.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyApp.dir\build.make CMakeFiles/MyApp.dir/user_data/user_data.cpp.i
-.PHONY : user_data/user_data.cpp.i
-
-user_data/user_data.s: user_data/user_data.cpp.s
-.PHONY : user_data/user_data.s
-
-# target to generate assembly for a file
-user_data/user_data.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyApp.dir\build.make CMakeFiles/MyApp.dir/user_data/user_data.cpp.s
-.PHONY : user_data/user_data.cpp.s
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -242,9 +218,6 @@ help:
 	@echo ... system/system.obj
 	@echo ... system/system.i
 	@echo ... system/system.s
-	@echo ... user_data/user_data.obj
-	@echo ... user_data/user_data.i
-	@echo ... user_data/user_data.s
 .PHONY : help
 
 

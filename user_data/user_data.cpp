@@ -1,6 +1,15 @@
 #include "user_data.h"
-#include "system.h"
-    bool hasUsed = false;
-    char userName[51] = {0};
-    MyVector<Wallet> walletList;
-    char borderLine[] = "==================================================";
+
+    // Implement Wallet
+    // constructor của Wallet
+    // Wallet::Wallet() {
+    //     strncpy(name, "Default", sizeof(name)-1);
+    //     money = 0;
+    //     isDeleted = false;
+    //     id = 0;
+    // }
+    // // set name của Wallet
+    // void Wallet::set_name (string s) {
+    //     strncpy(name, s.c_str(), sizeof(name)-1);       
+    // }
+

@@ -5,8 +5,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/MyApp.dir/main/main.cpp.obj.d"
   "CMakeFiles/MyApp.dir/system/system.cpp.obj"
   "CMakeFiles/MyApp.dir/system/system.cpp.obj.d"
-  "CMakeFiles/MyApp.dir/user_data/user_data.cpp.obj"
-  "CMakeFiles/MyApp.dir/user_data/user_data.cpp.obj.d"
   "MyApp.exe"
   "MyApp.exe.manifest"
   "MyApp.pdb"

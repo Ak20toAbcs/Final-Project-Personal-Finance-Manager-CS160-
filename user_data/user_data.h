@@ -1,8 +1,10 @@
 #pragma once
 
 #include <string>
+#include <cstring>
 using namespace std;
 
+// KHÔNG ĐƯỢC SỬA CÁI NÀY !!!
 template <typename T>
 struct MyVector {
     T* data; // con trỏ quản lý mảng động
@@ -54,31 +56,72 @@ struct MyVector {
     }
 };
 
+
 struct Wallet {
     char name[50]; // tên của ví
     int id; // id của ví
     int money; // số tiền trong ví
     bool isDeleted; // xem coi ví đã bị xóa chưa
-    Wallet() {
-        name[0] = '\0';
-        money = 0;
-        isDeleted = false;
-        id = 0;
-    }
+    //Wallet();
+    //void set_name (string s);
+};
 
-    void set_name (string s) {
-        // copy sang array
-        int ss = s.size();
-        int cap = (ss<49)? ss : 49;
-        for (int i=0; i<cap; ++i){
-            name[i] = s[i];
-        }
-        name[cap] = '\0';
+struct Date {
+    int day;
+    int month;
+    int year;
+};
+
+struct IncomeCategory { 
+    int id;
+    char name[50];
+};
+
+struct ExpenseCategory {
+    int id;
+    char name[50];
+};
+
+struct RecurringCategory {
+    int id;
+    bool feature;
+    char name[50];
+};
+
+struct IncomeHistory {
+    int id;
+    int money;
+    Date date;
+    char message[100];
+};
+
+struct ExpenseHistory {
+    int id;
+    int money;
+    Date date;
+    char message[100];
+};
+
+struct RecurringHistory {
+    int id;
+    Date date;    
+};
+
+
+struct User {
+    char userName[51];
+    MyVector<Wallet> walletList;
+    MyVector<IncomeCategory> incomeList;
+    MyVector<ExpenseCategory> expenseList;
+    MyVector<RecurringCategory> recurList;
+    MyVector<IncomeHistory> incomeHistory;
+    MyVector<ExpenseHistory> expenseHistory;
+    MyVector<RecurringHistory> recurHistory;
+        
+    User() {
+        strncpy(userName, "Default", sizeof(userName)-1);
     }
 };
 
-    extern bool hasUsed;
-    extern char userName[51];
-    extern MyVector<Wallet> walletList;
 
 
