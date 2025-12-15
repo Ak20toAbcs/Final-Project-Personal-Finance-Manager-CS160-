@@ -1,5 +1,9 @@
 #pragma once
-
+#include "user_data.h"
 using namespace std;
 
-void CreateUserPage();
+bool ResetUser();
+bool AddUser();
+bool LoadUser(User &user);
+bool SaveUser(User &user);
+void CreateUserPage(User &user);

@@ -7,15 +7,23 @@ using namespace std;
 // KHÔNG ĐƯỢC SỬA CÁI NÀY !!!
 template <typename T>
 struct MyVector {
+    private:
     T* data; // con trỏ quản lý mảng động
-    int size; // size hiện tại của vector
     int capacity; // capacity hiện tại của vector 
     
+    public:
+    int size; // size hiện tại của vector
     // Constructor khởi tạo
     MyVector() {
         size = 0;
         capacity = 10;  // sức chưa mặc định
         data = new T[capacity]; // Cấp phát bộ nhớ động cho kiểu T
+    }
+    ~MyVector(){
+        if (data!=nullptr){
+            delete[] data;
+            data = nullptr;
+        }
     }
 
     // hàm thêm phần tử vào cuối
@@ -55,7 +63,6 @@ struct MyVector {
         size--; 
     }
 };
-
 
 struct Wallet {
     char name[50]; // tên của ví
