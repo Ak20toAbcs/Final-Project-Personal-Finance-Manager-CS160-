@@ -1,3 +1,0 @@
-D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/build/CMakeFiles/MyApp.dir
-D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/build/CMakeFiles/edit_cache.dir
-D:/appdev/lab_project/Final-Project-Personal-Finance-Manager-CS160-/build/CMakeFiles/rebuild_cache.dir
