@@ -64,54 +64,65 @@ struct MyVector {
     }
 };
 
-struct Wallet {
-    char name[50]; // tên của ví
-    int id; // id của ví
-    int money; // số tiền trong ví
-    bool isDeleted; // xem coi ví đã bị xóa chưa
-    //Wallet();
-    //void set_name (string s);
-};
-
 struct Date {
     int day;
     int month;
     int year;
 };
 
+struct Wallet {
+    char name[50]; // tên của ví
+    int id; // id của ví
+    int money{0}; // số tiền trong ví
+    bool isDeleted{0}; // xem coi ví đã bị xóa chưa
+};
+
 struct IncomeCategory { 
     int id;
     char name[50];
+    bool isDeleted{0};
 };
 
 struct ExpenseCategory {
     int id;
     char name[50];
+    bool isDeleted{0};
 };
 
 struct RecurringCategory {
     int id;
-    bool feature;
+    int money{0};
+    bool isIncome{0};
     char name[50];
+    bool isDeleted{0};
 };
 
 struct IncomeHistory {
     int id;
-    int money;
+    int idCategory;
+    int idWallet;
+    int money{0};
     Date date;
     char message[100];
+    bool isDeleted{0};
 };
 
 struct ExpenseHistory {
     int id;
-    int money;
+    int idCategory;
+    int idWallet;
+    int money{0};
     Date date;
     char message[100];
+    bool isDeleted{0};
 };
 
 struct RecurringHistory {
     int id;
+    int idCategory;
+    int idWallet;
     Date date;    
+    bool isDeleted{0};
 };
 
 
@@ -124,11 +135,9 @@ struct User {
     MyVector<IncomeHistory> incomeHistory;
     MyVector<ExpenseHistory> expenseHistory;
     MyVector<RecurringHistory> recurHistory;
-        
-    User() {
-        strncpy(userName, "Default", sizeof(userName)-1);
-    }
 };
 
+// Hàm để chuyển từ tiền thành string
+string FormatMoney (int money);
 
 

@@ -1,5 +1,6 @@
 #include "create_user.h"
 #include "user_data.h"
+#include "dashboard.h"
 #include <iostream>
 using namespace std;
 
@@ -9,6 +10,6 @@ int main(){
     if (LoadUser(user) == false) {
         CreateUserPage(user);
     }
-    // vao menu
+    DashBoard(user);
     return 0;
 }

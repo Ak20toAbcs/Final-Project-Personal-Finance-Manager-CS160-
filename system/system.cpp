@@ -8,5 +8,8 @@ void ClearScreen(){
     system("cls");
 }
 
-string borderLine = "=============================";
+string borderLine = "+----------------------------------------------------------+";
+
+
+
 

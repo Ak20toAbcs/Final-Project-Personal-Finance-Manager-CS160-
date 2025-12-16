@@ -174,10 +174,11 @@ bool SaveUser(User &user){
 void CreateUserPage(User &user) {
     ClearScreen();
     cout << borderLine << '\n';
-    cout << "Welcome to Expense Manager!" << '\n';
+    cout << "                Welcome to Expense Manager!                 " << '\n';
     cout << "Please create your username: ";
     cin.getline(user.userName, 51);
-    cout << "Create Successful!" << '\n';
+    cout << '\n';
+    cout << "                Create Successful!                          " << '\n';
     return;
 }
 

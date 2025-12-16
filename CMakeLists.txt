@@ -7,25 +7,27 @@ project(MyApplication)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# 2. Thêm đường dẫn folder chứa file .h
-# Dòng này giúp bạn #include "user_data.h" thoải mái mà không cần ../
+# 2. Gom tất cả các file mã nguồn (.cpp)
+# Lệnh này quét các folder để tìm file .cpp và lưu vào biến SOURCES
 file(GLOB_RECURSE SOURCES 
     "main/*.cpp"
     "user_data/*.cpp"
     "database/*.cpp"
     "create_user/*.cpp"
     "system/*.cpp"
-    # Thêm folder khác vào đây nếu có
+    "dashboard/*.cpp"
 )
 
-# 3. TỰ ĐỘNG tìm tất cả file .cpp trong toàn bộ dự án
-# Lệnh này quét mọi ngóc ngách folder con để tìm file .cpp
+# 3. Thêm đường dẫn folder chứa file Header (.h)
+# Dòng này giúp bạn #include "user_data.h" thoải mái mà không cần ../
 include_directories(
     ${CMAKE_SOURCE_DIR}/create_user
     ${CMAKE_SOURCE_DIR}/system
     ${CMAKE_SOURCE_DIR}/user_data    
-
+    # Bạn nên thêm cả database và dashboard vào đây nếu các folder đó có file .h cần include
+    ${CMAKE_SOURCE_DIR}/database
+    ${CMAKE_SOURCE_DIR}/dashboard
 )
 
-# 4. Tạo file chạy (Executable) từ danh sách file vừa tìm được
+# 4. Tạo file chạy (Executable) từ danh sách file SOURCES vừa tìm được ở mục 2
 add_executable(MyApp ${SOURCES})
