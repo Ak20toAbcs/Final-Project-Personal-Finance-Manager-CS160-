@@ -1,4 +1,5 @@
 #include "user_data.h"
+#include <ctime>
 
     string FormatMoney (int money){
         if (money == 0) return "0 VND";
@@ -20,5 +21,12 @@
         res.push_back('N');
         res.push_back('D');
         return res;
+    }
+
+    Date GetCurrentDate() {
+    time_t now = time(nullptr);
+    tm* t = localtime(&now);
+
+    return { t->tm_mday, t->tm_mon + 1, t->tm_year + 1900 };
     }
 

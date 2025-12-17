@@ -70,6 +70,8 @@ struct Date {
     int year;
 };
 
+Date GetCurrentDate();
+
 struct Wallet {
     char name[50]; // tên của ví
     int id; // id của ví

@@ -179,6 +179,7 @@ void CreateUserPage(User &user) {
     cin.getline(user.userName, 51);
     cout << '\n';
     cout << "                Create Successful!                          " << '\n';
+    PauseScreen();
     return;
 }
 

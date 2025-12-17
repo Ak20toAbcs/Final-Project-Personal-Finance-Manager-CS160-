@@ -1,6 +1,7 @@
 #include <iostream>
 #include "dashboard.h"
 #include "system.h"
+#include "transaction.h"
 #include <iomanip>
 using namespace std;
 
@@ -50,19 +51,16 @@ void DashBoard (User &user){
 
 // Hàm Menu 
 void MenuPage(User &user){
-    bool t = true;
-    while (t){
         cout << "|                        MENU                              |" << '\n';
         cout << "[1] - Transaction                                           " << '\n';
         cout << "[2] - Statistic                                             " << '\n';
         cout << "[3] - Recurring                                             " << '\n';
         cout << "[4] - Setting                                               " << '\n';
         cout << "[5] - Exit                                                  " << '\n';
-        cout << "Option: "; 
-        int option; cin >> option; cin.ignore();
+        int option = InputNumber("Option: ");
         switch(option){
             case 1:{
-                // TransactionPage();
+                TransactionPage(user);
                 break;
             }
             case 2:{
@@ -78,13 +76,12 @@ void MenuPage(User &user){
                 break;
             }
             case 5:{
-                t = 0;
+                //t = 0;
                 break;
             }
             default:{
                 break;
             }
-        }
     }
        
 
