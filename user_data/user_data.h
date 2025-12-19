@@ -142,4 +142,7 @@ struct User {
 // Hàm để chuyển từ tiền thành string
 string FormatMoney (int money);
 
-
+MyVector <Wallet> SearchWallet (User &user, char s[]);
+MyVector <IncomeCategory> SearchIncome (User &user, char s[]);
+MyVector <ExpenseCategory> SearchExpense (User &user, char s[]);
+MyVector <RecurringCategory> SearchRecur (User &user, char s[]);
