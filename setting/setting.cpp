@@ -60,7 +60,7 @@ void EditUsernamePage(User& user) {
         case 1:{
             std::cout << "Current username: " << user.userName << '\n';
             std::cout << "New Username: ";
-            cin.getline(user.userName, 51);
+            std::cin.getline(user.userName, 51);
             std::cout << "Create sucessful !" << '\n';
             PauseScreen();
             break;
@@ -134,7 +134,7 @@ void EditListWallet(User &user) {
 
                 // Trường hợp không có wallet
                 if (displayList.size == 0) {
-                    cout << "There is no wallet !" << '\n';
+                    std::cout << "There is no wallet !" << '\n';
                     PauseScreen();
                     return;
                 }
@@ -162,12 +162,79 @@ void EditListWallet(User &user) {
             }
 
             if (option_wallet > displayList.size) {
-                cout << "Invalid input!" << '\n';
+                std::cout << "Invalid input!" << '\n';
                 PauseScreen();
                 return;
             }
 
-
-            cout << '\n';
+            if (EditWallet(user, displayList[option_wallet].id)) {
+                return;
             }
+            else continue;
+            }
+}
+
+bool EditWallet(User &user, int walletId) {
+    int idx = -1;
+    for(int i = 0; i < user.walletList.size; ++i) {
+        if(user.walletList[i].id == walletId) {
+            idx = i;
+            break;
+        }
+    }
+
+    if(idx == -1){
+        return false;
+    }
+
+    bool t = true;
+    while(t){
+        ClearScreen();
+        std::cout << borderLine << '\n';
+        std::cout << "Wallet " << user.walletList[idx].name << '\n';
+        std::cout << "[1] - Edit name                                             " << '\n';
+        std::cout << "[2] - Delete Wallet                                         " << '\n';
+        std::cout << "[3] - Back                                                  " << '\n';
+        int option = InputNumber("Option: ");
+        switch (option)
+        {
+        case 1:{
+            std::cout << "Create new name for wallet: ";
+            std::cin.getline(user.walletList[idx].name, sizeof(user.walletList[idx].name));
+            std::cout << "Sucessful !" << '\n';
+            PauseScreen();
+            break;
+        }
+        case 2:{
+            std::cout << "Are you sure ? ([1]: Yes / [2]: No)" << '\n';
+            int confirm = InputNumber("Option: ");
+            switch (confirm)
+            {
+            case 1: {
+                user.walletList[idx].isDeleted = true;
+                std::cout << "Sucessful !" << '\n';
+                return true;
+                break;
+            }
+            case 2: {
+                continue;
+                break;
+            }
+            default:
+                std::cout << "Invalid input" << '\n';
+                continue;
+                break;
+            }
+            break;
+        }
+        case 3:{
+            return true;
+            break;
+        }
+        default:
+            std::cout << "Invalid input!" << '\n';
+            PauseScreen();
+            break;
+        }
+    }
 }
