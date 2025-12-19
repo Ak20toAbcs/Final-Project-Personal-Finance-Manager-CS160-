@@ -3,7 +3,6 @@
 #include "string"
 #include <iostream>
 
-
 void SettingPage(User& user) {
     bool t = true;
     while(t){
@@ -94,7 +93,7 @@ void EditWalletPage(User& user) {
             break;
         }
         case 2:{
-            
+            AddWallet(user);
             break;
         }
         case 3:{
@@ -107,14 +106,6 @@ void EditWalletPage(User& user) {
             break;
         }
     }
-}
-
-void EditIncomeCategory(User& user) {
-
-}
-
-void EditExpenseCategory(User& user) {
-
 }
 
 void EditListWallet(User &user) {
@@ -200,6 +191,7 @@ bool EditWallet(User &user, int walletId) {
         {
         case 1:{
             std::cout << "Create new name for wallet: ";
+            std::cin.ignore(1000, '\n');
             std::cin.getline(user.walletList[idx].name, sizeof(user.walletList[idx].name));
             std::cout << "Sucessful !" << '\n';
             PauseScreen();
@@ -208,22 +200,11 @@ bool EditWallet(User &user, int walletId) {
         case 2:{
             std::cout << "Are you sure ? ([1]: Yes / [2]: No)" << '\n';
             int confirm = InputNumber("Option: ");
-            switch (confirm)
-            {
-            case 1: {
+            if (confirm == 1) {
                 user.walletList[idx].isDeleted = true;
                 std::cout << "Sucessful !" << '\n';
+                PauseScreen();
                 return true;
-                break;
-            }
-            case 2: {
-                continue;
-                break;
-            }
-            default:
-                std::cout << "Invalid input" << '\n';
-                continue;
-                break;
             }
             break;
         }
@@ -237,4 +218,26 @@ bool EditWallet(User &user, int walletId) {
             break;
         }
     }
+    return true;
+}
+
+void AddWallet(User &user) {
+    std::cout << "+----------------------Add Wallet-------------------------+" << '\n';
+
+    Wallet newWallet;
+    char tempName[100];
+    std::cin.ignore(1000, '\n');
+    
+    std::cout << "Name of Wallet is: ";
+    std::cin.getline(tempName, 51);
+    strncpy(newWallet.name, tempName, sizeof(newWallet.name)-1);
+    newWallet.name[sizeof(newWallet.name) - 1] = '\0';
+
+    newWallet.id = user.walletList.size + 1;
+    newWallet.isDeleted = false;
+
+    user.walletList.push_back(newWallet);
+
+    std::cout << "Add Wallet sucessful !" << '\n';
+    PauseScreen();
 }
