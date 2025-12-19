@@ -2,7 +2,6 @@
 
 #include <string>
 #include <cstring>
-using namespace std;
 
 // KHÔNG ĐƯỢC SỬA CÁI NÀY !!!
 template <typename T>
@@ -140,7 +139,7 @@ struct User {
 };
 
 // Hàm để chuyển từ tiền thành string
-string FormatMoney (int money);
+std::string FormatMoney (int money);
 
 MyVector <Wallet> SearchWallet (User &user, char s[]);
 MyVector <IncomeCategory> SearchIncome (User &user, char s[]);
