@@ -184,11 +184,156 @@ bool IncomePage(User &user){
         cout << "Successful!" << '\n';
         PauseScreen();
         return true;
-        
     }
-
 }
 bool ExpensePage(User &user){
+        bool t = true;
+    while(t){
+        ClearScreen();
+        cout << borderLine << '\n';
+        cout << "+----------------------Expense Page-------------------------+" << '\n';
+        cout << "Choose Wallet:                                              " << '\n';
+    
+        MyVector<Wallet> displayList;
+        for (int i=0; i<user.walletList.size; ++i){
+            if (!user.walletList[i].isDeleted)
+            displayList.push_back(user.walletList[i]);
+        }
+    
+        // Không có Wallet nào
+        if (displayList.size == 0) {
+            cout << "There is no wallet!" << '\n';
+            PauseScreen();
+            return false;
+        }
+        // Có Wallet
+        for (int i=0; i<displayList.size; ++i){
+            cout << "[";
+            cout << i;
+            cout << "]";
+            cout << " - ";
+            cout << displayList[i].name;
+            cout << '\n';
+        }
+
+        // Nút exit
+        cout << "[";
+            cout << displayList.size;
+            cout << "]";
+            cout << " - ";
+            cout << "Back";
+            cout << '\n';
+        
+        int option_wallet = InputNumber("Option: ");
+
+        if (option_wallet == displayList.size) return false;
+
+        if (option_wallet > displayList.size) {
+            cout << "Invalid input!" << '\n';
+            PauseScreen();
+            return false;
+        }
+
+        cout << '\n';
+        cout << "Choose category:" << '\n';
+        MyVector<ExpenseCategory> expenseList;
+        for (int i=0; i<user.expenseList.size; ++i){
+            if (!user.expenseList[i].isDeleted){
+                expenseList.push_back(user.expenseList[i]);
+            }
+        }
+
+        // không có Category nào
+        if (expenseList.size == 0 ) {
+            cout << "There is no category!" << '\n';
+            PauseScreen();
+            return false;
+        }
+
+        // Có Wallet
+        for (int i=0; i<expenseList.size; ++i){
+            cout << "[";
+            cout << i;
+            cout << "]";
+            cout << " - ";
+            cout << expenseList[i].name;
+            cout << '\n';
+        }
+
+        // Nút exit
+            cout << "[";
+            cout << expenseList.size;
+            cout << "]";
+            cout << " - ";
+            cout << "Back";
+            cout << '\n';
+        
+        int option_cat = InputNumber("Option: ");
+
+        if (option_cat == expenseList.size) return false;
+        
+        if (option_cat > expenseList.size) {
+            cout << "Invalid Input!" << '\n';
+            PauseScreen();
+            return false;
+        }
+
+        cout << '\n';
+        int amount = InputNumber("Choose amount: ");
+
+        if (amount<=0) {
+            cout << "Invalid expense!";
+            PauseScreen();
+            return false;
+        }
+        
+        cout << '\n';
+        cout << "Write message: ";
+        string s; 
+        getline(cin ,s);
+
+        Date date;
+        date = GetCurrentDate();
+
+        cout << '\n';
+        cout << "Use today's date (" 
+        << date.day << "/" << date.month << "/" << date.year 
+        << ")? (y/n): ";
+
+        char option_date;
+        while(!(cin >> option_date)) { 
+            // 1. Xử lý lỗi như bình thường
+            cin.clear(); 
+            cin.ignore(1000, '\n'); 
+
+            // 2. Xử lý giao diện:
+            // \033[1A: Di chuyển con trỏ lên 1 dòng (lên dòng chứa chữ "abc" vừa nhập sai)
+            // \033[2K: Xóa toàn bộ nội dung của dòng hiện tại
+            cout << "\033[1A" << "\033[2K"; 
+            
+            // 3. In lại dòng nhắc lệnh để nhập lại
+            cout << "Invalid input!" << "Use today's date (" 
+            << date.day << "/" << date.month << "/" << date.year 
+            << ")? (y/n): ";
+            }
+
+            cin.ignore();
+
+        if (option_date == 'n') {
+            date.day = InputNumber("Day: ");
+
+            date.month = InputNumber("Month: ");
+
+            date.year = InputNumber("Year: ");
+        }
+
+        AddExpense(user, displayList[option_wallet].id, expenseList[option_cat].id, amount, s, date);
+
+        cout << '\n';
+        cout << "Successful!" << '\n';
+        PauseScreen();
+        return true;
+    }
 
 }
 
@@ -199,6 +344,7 @@ bool AddIncome(User &user, int walletID, int catID, int amount, string s, Date d
         if (user.walletList[i].id == walletID){
             user.walletList[i].money += amount;
             foundWallet = true;
+            break;
         }
     }
     if (!foundWallet) {
@@ -218,7 +364,28 @@ bool AddIncome(User &user, int walletID, int catID, int amount, string s, Date d
 
 }
 
-bool AddExpense(User &user, int id, int amount, string s, Date date){
+bool AddExpense(User &user, int walletID, int catID, int amount, string s, Date date){
+        bool foundWallet = false;
 
-    
+    for (int i=0; i<user.walletList.size; ++i){
+        if (user.walletList[i].id == walletID){
+            user.walletList[i].money -= amount;
+            foundWallet = true;
+            break;
+        }
+    }
+    if (!foundWallet) {
+        return false;
+    }
+    ExpenseHistory newExpense;
+    newExpense.date = date;
+    newExpense.id = user.expenseHistory.size;
+    newExpense.idCategory = catID;
+    newExpense.idWallet = walletID;
+    strncpy(newExpense.message, s.c_str(), sizeof(newExpense.message)-1);
+    newExpense.money = amount;
+
+    user.expenseHistory.push_back(newExpense);
+
+    return true;
 }
