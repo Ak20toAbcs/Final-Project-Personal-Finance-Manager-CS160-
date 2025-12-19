@@ -226,18 +226,35 @@ void AddWallet(User &user) {
 
     Wallet newWallet;
     char tempName[100];
-    std::cin.ignore(1000, '\n');
     
     std::cout << "Name of Wallet is: ";
     std::cin.getline(tempName, 51);
     strncpy(newWallet.name, tempName, sizeof(newWallet.name)-1);
     newWallet.name[sizeof(newWallet.name) - 1] = '\0';
 
-    newWallet.id = user.walletList.size + 1;
+    int maxId = 0;
+    for(int i = 0; i < user.walletList.size; ++i) {
+        if(user.walletList[i].id > maxId) maxId = user.walletList[i].id;
+    }
+    newWallet.id = maxId + 1;
     newWallet.isDeleted = false;
 
     user.walletList.push_back(newWallet);
 
     std::cout << "Add Wallet sucessful !" << '\n';
+    PauseScreen();
+}
+
+void EditIncomeCategory(User& user) {
+    ClearScreen();
+    std::cout << borderLine << '\n';
+    std::cout << "Feature: Edit Income Category is under development." << '\n';
+    PauseScreen();
+}
+
+void EditExpenseCategory(User& user) {
+    ClearScreen();
+    std::cout << borderLine << '\n';
+    std::cout << "Feature: Edit Expense Category is under development." << '\n';
     PauseScreen();
 }
