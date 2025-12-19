@@ -1,8 +1,6 @@
 #include "system.h"
 #include <cstdlib>
 
-using namespace std;
-
 // dùng để xóa màn hình
 void ClearScreen(){
     system("cls");
@@ -10,19 +8,19 @@ void ClearScreen(){
 void PauseScreen(){
     system("pause");
 }
-int InputNumber(const string &prompt){
+int InputNumber(const std::string &prompt){
     int value;
-    cout << prompt;
-    while (!(cin >> value)) {
-        cin.clear();
-        cin.ignore(1000, '\n');
-        cout << "\033[1A" << "\033[2K"; // Xóa dòng lỗi
-        cout << "Invalid input! " << prompt; // In lại prompt
+    std::cout << prompt;
+    while (!(std::cin >> value)) {
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
+        std::cout << "\033[1A" << "\033[2K"; // Xóa dòng lỗi
+        std::cout << "Invalid input! " << prompt; // In lại prompt
     }
-    cin.ignore(); // Xóa bộ nhớ đệm sau khi nhập xong
+    std::cin.ignore(); // Xóa bộ nhớ đệm sau khi nhập xong
     return value;
 }
-string borderLine = "+----------------------------------------------------------+";
+std::string borderLine = "+----------------------------------------------------------+";
 
 
 
