@@ -1,0 +1,9 @@
+#pragma once
+#include "user_data.h"
+
+void SettingPage(User& user);
+void EditUsernamePage(User& user);
+void EditWalletPage(User& user);
+void EditIncomeCategory(User& user);
+void EditExpenseCategory(User& user);
+

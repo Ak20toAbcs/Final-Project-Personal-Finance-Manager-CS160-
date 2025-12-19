@@ -17,6 +17,7 @@ file(GLOB_RECURSE SOURCES
     "system/*.cpp"
     "dashboard/*.cpp"
     "transaction/*.cpp"
+    "setting/*.cpp"
 )
 
 # 3. Thêm đường dẫn folder chứa file Header (.h)
@@ -29,6 +30,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/database
     ${CMAKE_SOURCE_DIR}/dashboard
     ${CMAKE_SOURCE_DIR}/transaction
+    ${CMAKE_SOURCE_DIR}/setting
 )
 
 # 4. Tạo file chạy (Executable) từ danh sách file SOURCES vừa tìm được ở mục 2
