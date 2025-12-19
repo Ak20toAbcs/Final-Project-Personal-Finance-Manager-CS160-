@@ -6,4 +6,5 @@ void EditUsernamePage(User& user);
 void EditWalletPage(User& user);
 void EditIncomeCategory(User& user);
 void EditExpenseCategory(User& user);
+void EditListWallet(User &user);
 

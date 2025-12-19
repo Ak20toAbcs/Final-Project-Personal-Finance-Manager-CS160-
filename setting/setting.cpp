@@ -1,20 +1,20 @@
 #include "setting.h"
 #include "system.h"
 #include "string"
-#include "iostream"
-using namespace std;
+#include <iostream>
+
 
 void SettingPage(User& user) {
     bool t = true;
     while(t){
         ClearScreen();
-        cout << borderLine << '\n';
-        cout << "+---------------------Setting Page-------------------------+" << '\n';
-        cout << "[1] - Edit username                                         " << '\n';
-        cout << "[2] - Edit Wallet                                           " << '\n';
-        cout << "[3] - Edit Income Category                                  " << '\n';
-        cout << "[4] - Edit Expense Category                                 " << '\n';
-        cout << "[5] - Back                                                  " << '\n';
+        std::cout << borderLine << '\n';
+        std::cout << "+---------------------Setting Page-------------------------+" << '\n';
+        std::cout << "[1] - Edit username                                         " << '\n';
+        std::cout << "[2] - Edit Wallet                                           " << '\n';
+        std::cout << "[3] - Edit Income Category                                  " << '\n';
+        std::cout << "[4] - Edit Expense Category                                 " << '\n';
+        std::cout << "[5] - Back                                                  " << '\n';
         int option = InputNumber("Option: ");
         switch (option)
         {
@@ -39,7 +39,7 @@ void SettingPage(User& user) {
             break;
         }
         default:
-            cout << "Invalid input!" << '\n';
+            std::cout << "Invalid input!" << '\n';
             PauseScreen();
             break;
         }
@@ -50,18 +50,18 @@ void EditUsernamePage(User& user) {
     bool t = true;
     while(t){
         ClearScreen();
-        cout << borderLine << '\n';
-        cout << "+------------------Edit Username Page----------------------+" << '\n';
-        cout << "[1] - Edit Name                                             " << '\n';
-        cout << "[2] - Back                                                  " << '\n';
+        std::cout << borderLine << '\n';
+        std::cout << "+------------------Edit Username Page----------------------+" << '\n';
+        std::cout << "[1] - Edit Name                                             " << '\n';
+        std::cout << "[2] - Back                                                  " << '\n';
         int option = InputNumber("Option: ");
         switch (option)
         {
         case 1:{
-            cout << "Current username: " << user.userName << '\n';
-            cout << "New Username: ";
+            std::cout << "Current username: " << user.userName << '\n';
+            std::cout << "New Username: ";
             cin.getline(user.userName, 51);
-            cout << "Create sucessful !" << '\n';
+            std::cout << "Create sucessful !" << '\n';
             PauseScreen();
             break;
         }
@@ -70,7 +70,7 @@ void EditUsernamePage(User& user) {
             break;
         }
         default:
-            cout << "Invalid input!" << '\n';
+            std::cout << "Invalid input!" << '\n';
             PauseScreen();
             break;
         }
@@ -81,45 +81,17 @@ void EditWalletPage(User& user) {
     bool t = true;
     while(t){
         ClearScreen();
-        cout << borderLine << '\n';
-        cout << "+-------------------Edit Wallet Page-----------------------+" << '\n';
-        cout << "[1] - Show List Wallet                                      " << '\n';
-        cout << "[2] - Add Wallet                                            " << '\n';
-        cout << "[3] - Back                                                  " << '\n';
+        std::cout << borderLine << '\n';
+        std::cout << "+-------------------Edit Wallet Page-----------------------+" << '\n';
+        std::cout << "[1] - Show List Wallet                                      " << '\n';
+        std::cout << "[2] - Add Wallet                                            " << '\n';
+        std::cout << "[3] - Back                                                  " << '\n';
         int option = InputNumber("Option: ");
         switch (option)
         {
         case 1:{
-            bool t1 = true;
-            while(t1){
-                ClearScreen();
-                cout << borderLine << '\n';
-                // Hiển thị danh sách các loại ví 
-                cout << "+-------------------List Wallet Page-----------------------+" << '\n';
-                MyVector<Wallet> displayList;
-                for (int i=0; i<user.walletList.size; ++i){
-                    if (!user.walletList[i].isDeleted) cout << "[ " << i + 1 << " ] - " << user.walletList[i].name << '\n';
-                }
-                cout << "[0] - Back                                                  " << '\n';
-
-                cout << "Choose Wallet:                                              " << '\n';
-                int option = InputNumber("Option: ");
-                switch (option)
-                {
-                case 1:{
-                    t1 = 0;
-                    break;
-                }
-                case 2:{
-                    
-                }
-                default:
-                    cout << "Invalid input!" << '\n';
-                    PauseScreen();
-                    break;
-                }
-            }
-                    break;
+            EditListWallet(user);
+            break;
         }
         case 2:{
             
@@ -130,7 +102,7 @@ void EditWalletPage(User& user) {
             break;
         }
         default:
-            cout << "Invalid input!" << '\n';
+            std::cout << "Invalid input!" << '\n';
             PauseScreen();
             break;
         }
@@ -143,4 +115,59 @@ void EditIncomeCategory(User& user) {
 
 void EditExpenseCategory(User& user) {
 
+}
+
+void EditListWallet(User &user) {
+    bool t = true;
+            while(t){
+                ClearScreen();
+                std::cout << borderLine << '\n';
+                // Hiển thị danh sách các loại ví 
+                std::cout << "+-------------------List Wallet Page-----------------------+" << '\n';
+                MyVector<Wallet> displayList;
+
+                for(int i = 0; i < user.walletList.size; ++i) {
+                    if(!user.walletList[i].isDeleted) {
+                        displayList.push_back(user.walletList[i]);
+                    }
+                }
+
+                // Trường hợp không có wallet
+                if (displayList.size == 0) {
+                    cout << "There is no wallet !" << '\n';
+                    PauseScreen();
+                    return;
+                }
+
+                // Trường hợp có Wallet
+                for (int i=0; i<displayList.size; ++i){
+                    std::cout << "[";
+                    std::cout << i;
+                    std::cout << "]";
+                    std::cout << " - ";
+                    std::cout << displayList[i].name;
+                    std::cout << '\n';
+                }
+
+                std::cout << "[";
+                std::cout << displayList.size;
+                std::cout << "]";
+                std::cout << " - ";
+                std::cout << "Back";
+                std::cout << '\n';
+            int option_wallet = InputNumber("Option: ");
+
+            if (option_wallet == displayList.size) {
+                return;
+            }
+
+            if (option_wallet > displayList.size) {
+                cout << "Invalid input!" << '\n';
+                PauseScreen();
+                return;
+            }
+
+
+            cout << '\n';
+            }
 }
