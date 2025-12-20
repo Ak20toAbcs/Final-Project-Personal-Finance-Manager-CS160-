@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "statistic.h"
 #include "system.h"
 
@@ -6,12 +7,12 @@ void StatisticPage(User &user){
     bool t = true;
     while(t){
         ClearScreen();
-        cout << borderLine << '\n';
-        cout << "+--------------------Statistic Page------------------------+" << '\n';
-        cout << "[1] - Overall                                               " << '\n';
-        cout << "[2] - Specific Wallet                                       " << '\n';
-        cout << "[3] - Specific Category                                     " << '\n';
-        cout << "[4] - Back                                                  " << '\n';
+        std::cout << borderLine << '\n';
+        std::cout << "+--------------------Statistic Page------------------------+" << '\n';
+        std::cout << "[1] - Overall                                               " << '\n';
+        std::cout << "[2] - Specific Wallet                                       " << '\n';
+        std::cout << "[3] - Specific Category                                     " << '\n';
+        std::cout << "[4] - Back                                                  " << '\n';
         int option = InputNumber("Option: ");
         switch (option)
         {
@@ -28,7 +29,7 @@ void StatisticPage(User &user){
             // t = 0;
             break;
         default:{
-            cout << "Invalid Input!" << '\n';
+            std::cout << "Invalid Input!" << '\n';
             break;
         }
         }
@@ -52,7 +53,7 @@ void OverallPage(User &user){
         std::cout << "| ";
         std::cout << std::left << std::setw(24) << "Total Balance";
         std::cout << " | ";
-        std::cout << std::right << std::setw(29) << FormatMoney(sum);
+        std::cout << std::right << std::setw(29) << FormatMoney(income - expense);
         std::cout << " |" << '\n';
 
         int option = InputNumber("Option: ");
