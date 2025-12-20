@@ -2,6 +2,7 @@
 #include "dashboard.h"
 #include "system.h"
 #include "transaction.h"
+#include "statistic.h"
 #include <iomanip>
 
 
@@ -20,21 +21,13 @@ void DisplayMoney (User &user){
     }
     // Hiển thị cái Display List
     std::cout << borderLine << '\n';
-    std::cout << "| ";
-    std::cout << std::left << std::setw(24) << "Total Balance";
-    std::cout << " | ";
-    std::cout << std::right << std::setw(29) << FormatMoney(sum);
-    std::cout << " |" << '\n';
+    DisplayNameWithMoney("Total Balance", sum);
     std::cout << borderLine << '\n';
     if (displayList.size == 0) {
         std::cout << "|                   There is no Wallet!                    |" << '\n';
     }
     for (int i=0; i<displayList.size; ++i){
-        std::cout << "| ";
-        std::cout << std::left << std::setw(24) << displayList[i].name;
-        std::cout << " | ";
-        std::cout << std::right << std::setw(29) << FormatMoney(displayList[i].money);
-        std::cout << " |" << '\n';
+        DisplayNameWithMoney(displayList[i].name, displayList[i].money);
     }
     std::cout << borderLine << '\n';
 }
@@ -57,14 +50,14 @@ void MenuPage(User &user){
         std::cout << "[3] - Recurring                                             " << '\n';
         std::cout << "[4] - Setting                                               " << '\n';
         std::cout << "[5] - Exit                                                  " << '\n';
-        int option = InputNumber("Option: ");
+        int option = InputNumber("Option: ", 5, 1);
         switch(option){
             case 1:{
                 TransactionPage(user);
                 break;
             }
             case 2:{
-                // StatisticPage();
+                StatisticPage(user);
                 break;
             }
             case 3:{

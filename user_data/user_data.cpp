@@ -1,4 +1,6 @@
 #include "user_data.h"
+#include <iostream>
+#include <iomanip>
 #include <ctime>
 
     std::string FormatMoney (int money){
@@ -72,12 +74,20 @@
 
     int CompareDate(const Date&a, const Date&b){
     if (a.year < b.year) return -1;
-    if (a.year > b.year) return -1;
+    if (a.year > b.year) return 1;
     if (a.month < b.month) return -1;
     if (a.month > b.month) return 1;
     if (a.day < b.day) return -1;
     if (a.day > b.day) return 1;
     return 0;
+    }
+
+    void DisplayNameWithMoney (const char s[], int amount){
+        std::cout << "| ";
+        std::cout << std::left << std::setw(24) << s;
+        std::cout << " | ";
+        std::cout << std::right << std::setw(29) << FormatMoney(amount);
+        std::cout << " |" << '\n';
     }
 
     

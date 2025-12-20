@@ -147,3 +147,5 @@ MyVector <ExpenseCategory> SearchExpense (User &user, char s[]);
 MyVector <RecurringCategory> SearchRecur (User &user, char s[]);
 
 int CompareDate(const Date&a, const Date&b);
+
+void DisplayNameWithMoney (const char s[], int amount);

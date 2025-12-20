@@ -12,7 +12,7 @@ void TransactionPage(User &user){
         std::cout << "[1] - Add Income                                            " << '\n';
         std::cout << "[2] - Add Expense                                           " << '\n';
         std::cout << "[3] - Back                                                  " << '\n';
-        int option = InputNumber("Option: ");
+        int option = InputNumber("Option: ", 3, 1);
         switch (option)
         {
         case 1:{
@@ -28,8 +28,6 @@ void TransactionPage(User &user){
             break;
         }
         default:
-            std::cout << "Invalid input!" << '\n';
-            PauseScreen();
             break;
         }
     }
@@ -73,16 +71,9 @@ bool IncomePage(User &user){
             std::cout << " - ";
             std::cout << "Back";
             std::cout << '\n';
-        
-        int option_wallet = InputNumber("Option: ");
+        int option_wallet = InputNumber("Option: ", displayList.size, 0);
 
         if (option_wallet == displayList.size) return false;
-
-        if (option_wallet > displayList.size) {
-            std::cout << "Invalid input!" << '\n';
-            PauseScreen();
-            return false;
-        }
 
         std::cout << '\n';
         std::cout << "Choose category:" << '\n';
@@ -117,25 +108,13 @@ bool IncomePage(User &user){
             std::cout << " - ";
             std::cout << "Back";
             std::cout << '\n';
-        
-        int option_cat = InputNumber("Option: ");
+        int option_cat = InputNumber("Option: ", incomeList.size, 0);
 
         if (option_cat == incomeList.size) return false;
-        
-        if (option_cat > incomeList.size) {
-            std::cout << "Invalid Input!" << '\n';
-            PauseScreen();
-            return false;
-        }
 
         std::cout << '\n';
-        int amount = InputNumber("Choose amount: ");
 
-        if (amount<=0) {
-            std::cout << "Invalid income!";
-            PauseScreen();
-            return false;
-        }
+        int amount = InputNumber("Choose amount: ", INT_MAX, 0);
         
         std::cout << '\n';
         std::cout << "Write message: ";
@@ -148,33 +127,11 @@ bool IncomePage(User &user){
         std::cout << '\n';
         std::cout << "Use today's date (" 
         << date.day << "/" << date.month << "/" << date.year 
-        << ")? (y/n): ";
-
-        char option_date;
-        while(!(std::cin >> option_date)) { 
-            // 1. Xử lý lỗi như bình thường
-            std::cin.clear(); 
-            std::cin.ignore(1000, '\n'); 
-
-            // 2. Xử lý giao diện:
-            // \033[1A: Di chuyển con trỏ lên 1 dòng (lên dòng chứa chữ "abc" vừa nhập sai)
-            // \033[2K: Xóa toàn bộ nội dung của dòng hiện tại
-            std::cout << "\033[1A" << "\033[2K"; 
-            
-            // 3. In lại dòng nhắc lệnh để nhập lại
-            std::cout << "Invalid input!" << "Use today's date (" 
-            << date.day << "/" << date.month << "/" << date.year 
-            << ")? (y/n): ";
-            }
-
-            std::cin.ignore();
+        << ")? (y-YES / n-No): ";
+        char option_date = InputYesNo();
 
         if (option_date == 'n') {
-            date.day = InputNumber("Day: ");
-
-            date.month = InputNumber("Month: ");
-
-            date.year = InputNumber("Year: ");
+            date = InputDate();
         }
 
         AddIncome(user, displayList[option_wallet].id, incomeList[option_cat].id, amount, s, date);
@@ -223,15 +180,9 @@ bool ExpensePage(User &user){
             std::cout << "Back";
             std::cout << '\n';
         
-        int option_wallet = InputNumber("Option: ");
+        int option_wallet = InputNumber("Option: ", displayList.size, 0);
 
         if (option_wallet == displayList.size) return false;
-
-        if (option_wallet > displayList.size) {
-            std::cout << "Invalid input!" << '\n';
-            PauseScreen();
-            return false;
-        }
 
         std::cout << '\n';
         std::cout << "Choose category:" << '\n';
@@ -267,24 +218,13 @@ bool ExpensePage(User &user){
             std::cout << "Back";
             std::cout << '\n';
         
-        int option_cat = InputNumber("Option: ");
+        int option_cat = InputNumber("Option: ", expenseList.size, 0);
 
         if (option_cat == expenseList.size) return false;
-        
-        if (option_cat > expenseList.size) {
-            std::cout << "Invalid Input!" << '\n';
-            PauseScreen();
-            return false;
-        }
 
         std::cout << '\n';
-        int amount = InputNumber("Choose amount: ");
-
-        if (amount<=0) {
-            std::cout << "Invalid expense!";
-            PauseScreen();
-            return false;
-        }
+        
+        int amount = InputNumber("Choose amount: ", INT_MAX, 0);
         
         std::cout << '\n';
         std::cout << "Write message: ";
@@ -297,33 +237,11 @@ bool ExpensePage(User &user){
         std::cout << '\n';
         std::cout << "Use today's date (" 
         << date.day << "/" << date.month << "/" << date.year 
-        << ")? (y/n): ";
-
-        char option_date;
-        while(!(std::cin >> option_date)) { 
-            // 1. Xử lý lỗi như bình thường
-            std::cin.clear(); 
-            std::cin.ignore(1000, '\n'); 
-
-            // 2. Xử lý giao diện:
-            // \033[1A: Di chuyển con trỏ lên 1 dòng (lên dòng chứa chữ "abc" vừa nhập sai)
-            // \033[2K: Xóa toàn bộ nội dung của dòng hiện tại
-            std::cout << "\033[1A" << "\033[2K"; 
-            
-            // 3. In lại dòng nhắc lệnh để nhập lại
-            std::cout << "Invalid input!" << "Use today's date (" 
-            << date.day << "/" << date.month << "/" << date.year 
-            << ")? (y/n): ";
-            }
-
-            std::cin.ignore();
+        << ")? (y-YES / n-No): ";
+        char option_date = InputYesNo();
 
         if (option_date == 'n') {
-            date.day = InputNumber("Day: ");
-
-            date.month = InputNumber("Month: ");
-
-            date.year = InputNumber("Year: ");
+            date = InputDate();
         }
 
         AddExpense(user, displayList[option_wallet].id, expenseList[option_cat].id, amount, s, date);
