@@ -110,7 +110,7 @@ bool IncomePage(User &user){
             std::cout << '\n';
         int option_cat = InputNumber("Option: ", incomeList.size, 0);
 
-        if (option_cat == incomeList.size) return false;
+        if (option_cat == incomeList.size) continue;
 
         std::cout << '\n';
 
@@ -182,7 +182,7 @@ bool ExpensePage(User &user){
         
         int option_wallet = InputNumber("Option: ", displayList.size, 0);
 
-        if (option_wallet == displayList.size) return false;
+        if (option_wallet == displayList.size) continue;
 
         std::cout << '\n';
         std::cout << "Choose category:" << '\n';
@@ -273,6 +273,7 @@ bool AddIncome(User &user, int walletID, int catID, int amount, std::string s, D
     newIncome.idCategory = catID;
     newIncome.idWallet = walletID;
     strncpy(newIncome.message, s.c_str(), sizeof(newIncome.message)-1);
+    newIncome.message[sizeof(newIncome.message) - 1] = '\0';
     newIncome.money = amount;
 
     user.incomeHistory.push_back(newIncome);
@@ -300,6 +301,7 @@ bool AddExpense(User &user, int walletID, int catID, int amount, std::string s, 
     newExpense.idCategory = catID;
     newExpense.idWallet = walletID;
     strncpy(newExpense.message, s.c_str(), sizeof(newExpense.message)-1);
+    newExpense.message[sizeof(newExpense.message) - 1] = '\0';
     newExpense.money = amount;
 
     user.expenseHistory.push_back(newExpense);

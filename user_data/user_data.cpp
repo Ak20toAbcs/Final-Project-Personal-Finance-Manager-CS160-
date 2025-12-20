@@ -32,7 +32,7 @@
     return { t->tm_mday, t->tm_mon + 1, t->tm_year + 1900 };
     }
 
-    MyVector <Wallet> SearchWallet (User &user, char s[]){
+    MyVector <Wallet> SearchWallet (User &user, const char s[]){
         MyVector <Wallet> result;
         for (int i=0; i<user.walletList.size; ++i){
             if (user.walletList[i].isDeleted == false && strstr(user.walletList[i].name, s)!=NULL){
@@ -42,7 +42,7 @@
         return result;
     }
 
-    MyVector <IncomeCategory> SearchIncome (User &user, char s[]){
+    MyVector <IncomeCategory> SearchIncome (User &user, const char s[]){
         MyVector <IncomeCategory> result;
         for (int i=0; i<user.incomeList.size; ++i){
             if (user.incomeList[i].isDeleted == false && strstr(user.incomeList[i].name, s)!=NULL){
@@ -52,7 +52,7 @@
         return result;
     }
 
-    MyVector <ExpenseCategory> SearchExpense (User &user, char s[]){
+    MyVector <ExpenseCategory> SearchExpense (User &user, const char s[]){
         MyVector <ExpenseCategory> result;
         for (int i=0; i<user.expenseList.size; ++i){
             if (user.expenseList[i].isDeleted == false && strstr(user.expenseList[i].name, s)!=NULL){
@@ -62,7 +62,7 @@
         return result;
     }
 
-    MyVector <RecurringCategory> SearchRecur (User &user, char s[]){
+    MyVector <RecurringCategory> SearchRecur (User &user, const char s[]){
         MyVector <RecurringCategory> result;
         for (int i=0; i<user.recurList.size; ++i){
             if (user.recurList[i].isDeleted == false && strstr(user.recurList[i].name, s)!=NULL){

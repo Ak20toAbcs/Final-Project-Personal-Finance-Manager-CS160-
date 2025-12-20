@@ -6,23 +6,23 @@
 int main(){
     ResetUser();
     User user;
-    IncomeCategory a;
+    IncomeCategory a; a.id = 0;
     strncpy(a.name, "Default", sizeof(a.name)-1);
-    IncomeCategory b;
+    IncomeCategory b; b.id = 1;
     strncpy(b.name, "Salary", sizeof(b.name)-1);
-    IncomeCategory c;
+    IncomeCategory c; c.id = 2;
     strncpy(c.name, "Onlyfans", sizeof(c.name)-1);
-    ExpenseCategory q;
+    ExpenseCategory q; q.id = 0;
     strncpy(q.name, "Default", sizeof(a.name)-1);
-    ExpenseCategory p;
+    ExpenseCategory p; p.id = 1;
     strncpy(p.name, "Shopping", sizeof(b.name)-1);
-    ExpenseCategory w;
+    ExpenseCategory w; w.id = 2;
     strncpy(w.name, "Groceries", sizeof(c.name)-1);
-    Wallet x;
+    Wallet x; x.id = 0;
     strncpy(x.name, "Cash", sizeof(x.name)-1);
-    Wallet y;
+    Wallet y; y.id = 1;
     strncpy(y.name, "Bank", sizeof(y.name)-1);
-    Wallet z;
+    Wallet z; z.id = 2;
     strncpy(z.name, "BIDV", sizeof(z.name)-1);
 
     user.walletList.push_back(x);
