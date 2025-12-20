@@ -435,7 +435,7 @@ void AnnualAnalysis(User &user, MyVector<Date> &listYear){
                 break;
             }
             case 2:{
-                //ExpenseAnnual(user, listYear);
+                ExpenseAnnual(user, listYear);
                 break;
             }
             case 3:{
@@ -483,9 +483,9 @@ void NetAnnual(User &user, MyVector<Date> &listYear) {
                     expense+= user.expenseHistory[j].money;
                 }
                 std::cout << "Year: " << year << '\n';
-                std::cout << "Income: " << FormatMoney(income) << '\n';
-                std::cout << "Expense: " << FormatMoney(expense) << '\n';
-                std::cout << "Net Balance: " << FormatMoney(income-expense) << '\n';
+                DisplayNameWithMoney("Income", income);
+                DisplayNameWithMoney("Expense", expense);
+                DisplayNameWithMoney("Net Balance", income - expense);
                 std::cout << borderLine << '\n';
 
             }
