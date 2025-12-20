@@ -5,7 +5,6 @@
 #include <fstream>
 
 
-using namespace std;
 
 // Hàm để reset lại HasUsed = 0
 bool ResetUser (){

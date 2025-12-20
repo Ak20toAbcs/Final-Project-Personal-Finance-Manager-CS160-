@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
 
 void ClearScreen();
 void PauseScreen();
