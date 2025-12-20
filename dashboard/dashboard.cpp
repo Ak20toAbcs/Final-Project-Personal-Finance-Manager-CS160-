@@ -3,7 +3,7 @@
 #include "system.h"
 #include "transaction.h"
 #include <iomanip>
-using namespace std;
+
 
 // Hàm hiển thị Total 
 void DisplayMoney (User &user){
@@ -19,31 +19,31 @@ void DisplayMoney (User &user){
         
     }
     // Hiển thị cái Display List
-    cout << borderLine << '\n';
-    cout << "| ";
-    cout << left << setw(24) << "Total Balance";
-    cout << " | ";
-    cout << right << setw(29) << FormatMoney(sum);
-    cout << " |" << '\n';
-    cout << borderLine << '\n';
+    std::cout << borderLine << '\n';
+    std::cout << "| ";
+    std::cout << std::left << std::setw(24) << "Total Balance";
+    std::cout << " | ";
+    std::cout << std::right << std::setw(29) << FormatMoney(sum);
+    std::cout << " |" << '\n';
+    std::cout << borderLine << '\n';
     if (displayList.size == 0) {
-        cout << "|                   There is no Wallet!                    |" << '\n';
+        std::cout << "|                   There is no Wallet!                    |" << '\n';
     }
     for (int i=0; i<displayList.size; ++i){
-        cout << "| ";
-        cout << left << setw(24) << displayList[i].name;
-        cout << " | ";
-        cout << right << setw(29) << FormatMoney(displayList[i].money);
-        cout << " |" << '\n';
+        std::cout << "| ";
+        std::cout << std::left << std::setw(24) << displayList[i].name;
+        std::cout << " | ";
+        std::cout << std::right << std::setw(29) << FormatMoney(displayList[i].money);
+        std::cout << " |" << '\n';
     }
-    cout << borderLine << '\n';
+    std::cout << borderLine << '\n';
 }
 
 // Hàm dashboard
 void DashBoard (User &user){
     while(true){
         ClearScreen();
-        cout << "User: " << user.userName << '\n';
+        std::cout << "User: " << user.userName << '\n';
         DisplayMoney(user);
         MenuPage(user);
     }
@@ -51,12 +51,12 @@ void DashBoard (User &user){
 
 // Hàm Menu 
 void MenuPage(User &user){
-        cout << "|                        MENU                              |" << '\n';
-        cout << "[1] - Transaction                                           " << '\n';
-        cout << "[2] - Statistic                                             " << '\n';
-        cout << "[3] - Recurring                                             " << '\n';
-        cout << "[4] - Setting                                               " << '\n';
-        cout << "[5] - Exit                                                  " << '\n';
+        std::cout << "|                        MENU                              |" << '\n';
+        std::cout << "[1] - Transaction                                           " << '\n';
+        std::cout << "[2] - Statistic                                             " << '\n';
+        std::cout << "[3] - Recurring                                             " << '\n';
+        std::cout << "[4] - Setting                                               " << '\n';
+        std::cout << "[5] - Exit                                                  " << '\n';
         int option = InputNumber("Option: ");
         switch(option){
             case 1:{

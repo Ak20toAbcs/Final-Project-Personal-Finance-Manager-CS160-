@@ -5,11 +5,10 @@
 #include <fstream>
 
 
-
 // Hàm để reset lại HasUsed = 0
 bool ResetUser (){
-    ofstream fout;
-    fout.open("config/app_config.bin", ios::binary);
+    std::ofstream fout;
+    fout.open("config/app_config.bin", std::ios::binary);
     if (fout.is_open() == false) return false;
 
     bool temp = false;
@@ -19,8 +18,8 @@ bool ResetUser (){
 }
 // Hàm để thay hasUser thành true
 bool AddUser (){
-    ofstream fout;
-    fout.open("config/app_config.bin", ios::binary);
+    std::ofstream fout;
+    fout.open("config/app_config.bin", std::ios::binary);
     if (fout.is_open() == false) return false;
 
     bool temp = true;
@@ -30,8 +29,8 @@ bool AddUser (){
 }
 // Hàm để load data cho user
 bool LoadUser(User &user){
-    ifstream fin;
-    fin.open("config/app_config.bin", ios::binary);
+    std::ifstream fin;
+    fin.open("config/app_config.bin", std::ios::binary);
     if (fin.is_open() == false) return false;
 
     bool hasUsed;
@@ -48,7 +47,7 @@ bool LoadUser(User &user){
     user.incomeHistory.size = 0;
     user.expenseHistory.size = 0;
     user.recurHistory.size = 0;
-        fin.open("database/database.bin", ios::binary);
+        fin.open("database/database.bin", std::ios::binary);
         if (fin.is_open() == false) return false;
 
         // đọc userName
@@ -117,15 +116,15 @@ bool LoadUser(User &user){
 }
 // Hàm để save data cho user
 bool SaveUser(User &user){
-        ofstream fout;
+        std::ofstream fout;
         // ghi has Used
-        fout.open("config/app_config.bin", ios::binary);
+        fout.open("config/app_config.bin", std::ios::binary);
         bool hasUsed = true;
         fout.write((char*)&hasUsed, sizeof(bool));
         fout.close();
 
         // ghi DATA
-        fout.open("database/database.bin", ios::binary);
+        fout.open("database/database.bin", std::ios::binary);
         if (fout.is_open()==false) return false;
         // save userName 
         fout.write((char*)&user.userName, sizeof(user.userName));
@@ -172,12 +171,12 @@ bool SaveUser(User &user){
 // Trang khi mở app lần đầu
 void CreateUserPage(User &user) {
     ClearScreen();
-    cout << borderLine << '\n';
-    cout << "                Welcome to Expense Manager!                 " << '\n';
-    cout << "Please create your username: ";
-    cin.getline(user.userName, 51);
-    cout << '\n';
-    cout << "                Create Successful!                          " << '\n';
+    std::cout << borderLine << '\n';
+    std::cout << "                Welcome to Expense Manager!                 " << '\n';
+    std::cout << "Please create your username: ";
+    std::cin.getline(user.userName, 51);
+    std::cout << '\n';
+    std::cout << "                Create Successful!                          " << '\n';
     PauseScreen();
     return;
 }

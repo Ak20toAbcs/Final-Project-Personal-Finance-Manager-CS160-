@@ -38,8 +38,8 @@ void OverallPage(User &user){
     bool t = true;
     while (t){
         ClearScreen();
-        cout << borderLine << '\n';
-        cout << "+---------------------Overall Page-------------------------+" << '\n';
+        std::cout << borderLine << '\n';
+        std::cout << "+---------------------Overall Page-------------------------+" << '\n';
         int income = 0;
         int expense = 0;
         for (int i=0; i<user.incomeHistory.size; ++i){
@@ -52,7 +52,7 @@ void OverallPage(User &user){
         std::cout << "| ";
         std::cout << std::left << std::setw(24) << "Total Balance";
         std::cout << " | ";
-        std::cout << std::right << std::setw(29) << std::FormatMoney(sum);
+        std::cout << std::right << std::setw(29) << FormatMoney(sum);
         std::cout << " |" << '\n';
 
         int option = InputNumber("Option: ");
