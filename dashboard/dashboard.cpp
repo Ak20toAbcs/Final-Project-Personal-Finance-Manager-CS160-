@@ -3,6 +3,7 @@
 #include "system.h"
 #include "transaction.h"
 #include "statistic.h"
+#include "setting.h"
 #include <iomanip>
 
 
@@ -65,7 +66,7 @@ void MenuPage(User &user){
                 break;
             }
             case 4:{
-                // SettingPage();
+                SettingPage(user);
                 break;
             }
             case 5:{

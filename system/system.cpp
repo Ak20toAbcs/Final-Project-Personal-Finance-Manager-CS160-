@@ -17,7 +17,7 @@ int InputNumber(const std::string &prompt, int maxIn, int minIn){
         std::cout << "\033[1A" << "\033[2K"; // Xóa dòng lỗi
         std::cout << "Invalid input! " << prompt; // In lại prompt
     }
-    std::cin.ignore(); // Xóa bộ nhớ đệm sau khi nhập xong
+    std::cin.ignore(1000, '\n'); // Xóa bộ nhớ đệm sau khi nhập xong
     return value;
 }
 
@@ -31,7 +31,7 @@ Date InputDate(){
         std::cout << "\033[1A" << "\033[2K"; // Xóa dòng lỗi
         std::cout << "Invalid input! " << prompt; // In lại prompt
     }
-    std::cin.ignore(); // Xóa bộ nhớ đệm sau khi nhập xong
+    std::cin.ignore(1000, '\n'); // Xóa bộ nhớ đệm sau khi nhập xong
 
     int dayinMonth [13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     if (result.year%400 == 0 || (result.year%4==0 && result.year %100 !=0)) dayinMonth[2] = 29;
@@ -44,7 +44,7 @@ Date InputDate(){
         std::cout << "\033[1A" << "\033[2K"; // Xóa dòng lỗi
         std::cout << "Invalid input! " << prompt; // In lại prompt
     }
-    std::cin.ignore(); // Xóa bộ nhớ đệm sau khi nhập xong
+    std::cin.ignore(1000, '\n'); // Xóa bộ nhớ đệm sau khi nhập xong
 
     prompt = "Day: ";
     std::cout << prompt;
@@ -54,7 +54,7 @@ Date InputDate(){
         std::cout << "\033[1A" << "\033[2K"; // Xóa dòng lỗi
         std::cout << "Invalid input! " << prompt; // In lại prompt
     }
-    std::cin.ignore(); // Xóa bộ nhớ đệm sau khi nhập xong
+    std::cin.ignore(1000, '\n'); // Xóa bộ nhớ đệm sau khi nhập xong
     return result;
 }
 
@@ -67,7 +67,7 @@ char InputYesNo(){
         std::cout << "\033[1A" << "\033[2K"; // Xóa dòng lỗi
         std::cout << "Invalid input! " << prompt; // In lại prompt
     }
-    std::cin.ignore(); // Xóa bộ đệm khi dùng xong
+    std::cin.ignore(1000, '\n'); // Xóa bộ đệm khi dùng xong
     return option;
 }
 std::string borderLine = "+----------------------------------------------------------+";

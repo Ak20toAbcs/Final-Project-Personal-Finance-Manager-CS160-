@@ -1,0 +1,18 @@
+#pragma once
+#include "user_data.h"
+
+void SettingPage(User& user);
+void EditUsernamePage(User& user);
+void EditWalletPage(User& user);
+void EditListWallet(User &user);
+bool EditWallet(User &user, int walletId);
+void AddWallet(User &user);
+void EditCategoryPage(User &user);
+void EditIncomeCategory(User& user);
+void EditExpenseCategory(User& user);
+void AddIncomeCat(User &user);
+void AddExpenseCat(User &user);
+void ShowInCat (User &user);
+bool EditIn(User &user, int idCat);
+void ShowExCat (User &user);
+bool EditEx(User &user, int idCat);
