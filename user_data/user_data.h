@@ -101,6 +101,7 @@ struct RecurringCategory {
     bool isDeleted{0};
     Date starting;
     Date ending;
+    Date lastUpdate;
 };
 
 struct IncomeHistory {

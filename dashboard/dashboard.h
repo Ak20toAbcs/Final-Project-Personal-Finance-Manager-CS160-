@@ -8,4 +8,4 @@ void DashBoard (User &user);
 void DisplayMoney (User &user);
 
 // Hàm hiển thị Menu
-void MenuPage (User &user);
+bool MenuPage (User &user);

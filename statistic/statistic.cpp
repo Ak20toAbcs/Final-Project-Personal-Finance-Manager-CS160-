@@ -284,6 +284,7 @@ void WalletStat(User& user, Date &bd, Date &kt, int id){
                     displayList.push_back(user.walletList[i]);
                 }
             }
+            
             if (displayList.size == 0) std::cout << "There is no wallet!" << '\n';
             else std::cout << "Choose wallet" << '\n';
             for (int i=0; i<displayList.size; ++i){

@@ -1,7 +1,7 @@
 #include "recurring.h"
 #include <iostream>
 #include "system.h"
-
+#include "transaction.h"
 
 void RecurringPage(User &user) {
     bool t = true;
@@ -120,6 +120,7 @@ void AddRecurring(User &user) {
                     newRecur.money = amount;
                     newRecur.starting = st;
                     newRecur.ending = ed;
+                    newRecur.lastUpdate = {0, 0, 0};
                     user.recurList.push_back(newRecur);
                     std::cout << "Add successful!" << '\n';
                     PauseScreen();
@@ -165,6 +166,7 @@ void AddRecurring(User &user) {
                     newRecur.money = amount;
                     newRecur.starting = st;
                     newRecur.ending = ed;
+                    newRecur.lastUpdate = {0, 0, 0};
                     user.recurList.push_back(newRecur);
                     std::cout << "Add successful!" << '\n';
                     PauseScreen();
@@ -381,4 +383,26 @@ void EditCat(User &user, int catId){
         }
     }
     
+}
+
+void LoadRecur(User &user){
+    Date curDate = GetCurrentDate();
+    for (int i=0; i<user.recurList.size; ++i){
+        if (!user.recurList[i].isDeleted) {
+            Date lastCheck = user.recurList[i].lastUpdate;
+            if (curDate.month == lastCheck.month && curDate.year == lastCheck.year) {
+                continue;
+            }
+            if (user.recurList[i].isExpense){
+                AddExpense(user, user.recurList[i].walletId, user.recurList[i].exId, user.recurList[i].money, 
+                user.recurList[i].message, curDate);
+                user.recurList[i].lastUpdate = curDate;
+            }
+            else {
+                AddIncome(user, user.recurList[i].walletId, user.recurList[i].inId, user.recurList[i].money, 
+                user.recurList[i].message, curDate);
+                user.recurList[i].lastUpdate = curDate;
+            }
+        }
+    }
 }

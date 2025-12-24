@@ -40,12 +40,12 @@ void DashBoard (User &user){
         ClearScreen();
         std::cout << "User: " << user.userName << '\n';
         DisplayMoney(user);
-        MenuPage(user);
+        if (MenuPage(user)) return;
     }
 }
 
 // Hàm Menu 
-void MenuPage(User &user){
+bool MenuPage(User &user){
         std::cout << "|                        MENU                              |" << '\n';
         std::cout << "[1] - Transaction                                           " << '\n';
         std::cout << "[2] - Statistic                                             " << '\n';
@@ -71,13 +71,12 @@ void MenuPage(User &user){
                 break;
             }
             case 5:{
-                //t = 0;
+                return true;
                 break;
             }
             default:{
                 break;
             }
-    }
-       
-
+        }
+        return false;
 }
