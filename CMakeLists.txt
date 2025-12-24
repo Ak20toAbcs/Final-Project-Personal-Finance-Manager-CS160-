@@ -6,6 +6,7 @@ project(MyApplication)
 # 1. Cấu hình C++ chuẩn (ví dụ C++ 17)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 # 2. Gom tất cả các file mã nguồn (.cpp)
 # Lệnh này quét các folder để tìm file .cpp và lưu vào biến SOURCES
