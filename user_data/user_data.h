@@ -72,7 +72,7 @@ struct Date {
 Date GetCurrentDate();
 
 struct Wallet {
-    char name[50]; // tên của ví
+    char name[51]; // tên của ví
     int id; // id của ví
     int money{0}; // số tiền trong ví
     bool isDeleted{0}; // xem coi ví đã bị xóa chưa
@@ -80,22 +80,27 @@ struct Wallet {
 
 struct IncomeCategory { 
     int id;
-    char name[50];
+    char name[51];
     bool isDeleted{0};
 };
 
 struct ExpenseCategory {
     int id;
-    char name[50];
+    char name[51];
     bool isDeleted{0};
 };
 
 struct RecurringCategory {
     int id;
     int money{0};
-    bool isIncome{0};
-    char name[50];
+    bool isExpense{0};
+    int walletId;
+    int inId;
+    int exId;
+    char message[101];
     bool isDeleted{0};
+    Date starting;
+    Date ending;
 };
 
 struct IncomeHistory {
@@ -104,7 +109,7 @@ struct IncomeHistory {
     int idWallet;
     int money{0};
     Date date;
-    char message[100];
+    char message[101];
     bool isDeleted{0};
 };
 
@@ -114,7 +119,7 @@ struct ExpenseHistory {
     int idWallet;
     int money{0};
     Date date;
-    char message[100];
+    char message[101];
     bool isDeleted{0};
 };
 
@@ -136,15 +141,28 @@ struct User {
     MyVector<IncomeHistory> incomeHistory;
     MyVector<ExpenseHistory> expenseHistory;
     MyVector<RecurringHistory> recurHistory;
+    int nextWallet_id {0};
+    int nextIncome_id{0};
+    int nextExpense_id{0};
+    int nextRecur_id{0};
+    int nextInHis_id{0};
+    int nextExHis_id{0};
+    int nextRecHis_id{0};
 };
 
 // Hàm để chuyển từ tiền thành string
 std::string FormatMoney (const int money);
 
-MyVector <Wallet> SearchWallet (User &user, const char s[]);
-MyVector <IncomeCategory> SearchIncome (User &user, const char s[]);
-MyVector <ExpenseCategory> SearchExpense (User &user, const char s[]);
-MyVector <RecurringCategory> SearchRecur (User &user, const char s[]);
+// MyVector <Wallet> SearchWallet (User &user, const char s[]);
+// MyVector <IncomeCategory> SearchIncome (User &user, const char s[]);
+// MyVector <ExpenseCategory> SearchExpense (User &user, const char s[]);
+// MyVector <RecurringCategory> SearchRecur (User &user, const char s[]);
+
+int SearchWalletID (User &user, int id);
+int SearchIncomeID (User &user, int id);
+int SearchExpenseID (User &user, int id);
+int SearchRecurID (User &user, int id);
+
 
 int CompareDate(const Date&a, const Date&b);
 

@@ -52,6 +52,14 @@ bool LoadUser(User &user){
 
         // đọc userName
         fin.read((char*)&user.userName, sizeof(user.userName));
+
+        fin.read((char*) &user.nextWallet_id, sizeof(int));
+        fin.read((char*) &user.nextIncome_id, sizeof(int));
+        fin.read((char*) &user.nextExpense_id, sizeof(int));
+        fin.read((char*) &user.nextRecur_id, sizeof(int));
+        fin.read((char*) &user.nextInHis_id, sizeof(int));
+        fin.read((char*) &user.nextExHis_id, sizeof(int));
+        fin.read((char*) &user.nextRecHis_id, sizeof(int));
         
         int tempSize = 0;
         
@@ -129,6 +137,14 @@ bool SaveUser(User &user){
         // save userName 
         fout.write((char*)&user.userName, sizeof(user.userName));
 
+        fout.write((char*) &user.nextWallet_id, sizeof(int));
+        fout.write((char*) &user.nextIncome_id, sizeof(int));
+        fout.write((char*) &user.nextExpense_id, sizeof(int));
+        fout.write((char*) &user.nextRecur_id, sizeof(int));
+        fout.write((char*) &user.nextInHis_id, sizeof(int));
+        fout.write((char*) &user.nextExHis_id, sizeof(int));
+        fout.write((char*) &user.nextRecHis_id, sizeof(int));
+        
         // save WalletList
         fout.write((char*)&user.walletList.size, sizeof(int));
         for (int i=0; i<user.walletList.size; ++i)
@@ -174,7 +190,10 @@ void CreateUserPage(User &user) {
     std::cout << borderLine << '\n';
     std::cout << "                Welcome to Expense Manager!                 " << '\n';
     std::cout << "Please create your username: ";
-    std::cin.getline(user.userName, 51);
+    std::string s; 
+    std::getline(std::cin, s);
+    strncpy(user.userName, s.c_str(), 50);
+    user.userName[50] = '\0';
     std::cout << '\n';
     std::cout << "                Create Successful!                          " << '\n';
     PauseScreen();

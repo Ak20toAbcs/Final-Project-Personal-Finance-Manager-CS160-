@@ -9,22 +9,22 @@ void TransactionPage(User &user){
         ClearScreen();
         std::cout << borderLine << '\n';
         std::cout << "+-------------------Transaction Page-----------------------+" << '\n';
-        std::cout << "[1] - Add Income                                            " << '\n';
-        std::cout << "[2] - Add Expense                                           " << '\n';
-        std::cout << "[3] - Back                                                  " << '\n';
-        int option = InputNumber("Option: ", 3, 1);
+        std::cout << "[0] - Add Income                                            " << '\n';
+        std::cout << "[1] - Add Expense                                           " << '\n';
+        std::cout << "[2] - Back                                                  " << '\n';
+        int option = InputNumber("Option: ", 2, 0);
         switch (option)
         {
+        case 0:{
+            if (IncomePage(user)) return;
+            break;
+        }
         case 1:{
-            if (IncomePage(user)) t = 0;
+            if (ExpensePage(user)) return;
             break;
         }
         case 2:{
-            if (ExpensePage(user)) t = 0;
-            break;
-        }
-        case 3:{
-            t = 0;
+            return;
             break;
         }
         default:
@@ -182,7 +182,7 @@ bool ExpensePage(User &user){
         
         int option_wallet = InputNumber("Option: ", displayList.size, 0);
 
-        if (option_wallet == displayList.size) continue;
+        if (option_wallet == displayList.size) return false;
 
         std::cout << '\n';
         std::cout << "Choose category:" << '\n';
@@ -254,22 +254,14 @@ bool ExpensePage(User &user){
 
 }
 
-bool AddIncome(User &user, int walletID, int catID, int amount, std::string s, Date date){
-    bool foundWallet = false;
+void AddIncome(User &user, int walletID, int catID, int amount, std::string s, Date date){
+    int idx = SearchWalletID(user, walletID);
+    if (idx == -1) return;
+    else user.walletList[idx].money += amount;
 
-    for (int i=0; i<user.walletList.size; ++i){
-        if (user.walletList[i].id == walletID){
-            user.walletList[i].money += amount;
-            foundWallet = true;
-            break;
-        }
-    }
-    if (!foundWallet) {
-        return false;
-    }
     IncomeHistory newIncome;
     newIncome.date = date;
-    newIncome.id = user.incomeHistory.size;
+    newIncome.id = user.nextInHis_id++;
     newIncome.idCategory = catID;
     newIncome.idWallet = walletID;
     strncpy(newIncome.message, s.c_str(), sizeof(newIncome.message)-1);
@@ -278,26 +270,17 @@ bool AddIncome(User &user, int walletID, int catID, int amount, std::string s, D
 
     user.incomeHistory.push_back(newIncome);
 
-    return true;
-
+    return;
 }
 
-bool AddExpense(User &user, int walletID, int catID, int amount, std::string s, Date date){
-        bool foundWallet = false;
+void AddExpense(User &user, int walletID, int catID, int amount, std::string s, Date date){
+    int idx = SearchWalletID(user, walletID);
+    if (idx == -1) return;
+    else user.walletList[idx].money -= amount;
 
-    for (int i=0; i<user.walletList.size; ++i){
-        if (user.walletList[i].id == walletID){
-            user.walletList[i].money -= amount;
-            foundWallet = true;
-            break;
-        }
-    }
-    if (!foundWallet) {
-        return false;
-    }
     ExpenseHistory newExpense;
     newExpense.date = date;
-    newExpense.id = user.expenseHistory.size;
+    newExpense.id = user.nextExpense_id++;
     newExpense.idCategory = catID;
     newExpense.idWallet = walletID;
     strncpy(newExpense.message, s.c_str(), sizeof(newExpense.message)-1);
@@ -306,5 +289,5 @@ bool AddExpense(User &user, int walletID, int catID, int amount, std::string s, 
 
     user.expenseHistory.push_back(newExpense);
 
-    return true;
+    return;
 }

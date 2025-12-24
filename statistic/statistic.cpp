@@ -10,45 +10,45 @@ void StatisticPage(User &user){
         ClearScreen();
         std::cout << borderLine << '\n';
         std::cout << "+--------------------Statistic Page------------------------+" << '\n';
-        std::cout << "[1] - Overall                                               " << '\n';
-        std::cout << "[2] - Income Breakdown                                      " << '\n';
-        std::cout << "[3] - Expense Breakdown                                     " << '\n';
-        std::cout << "[4] - Wallet                                                " << '\n';
-        std::cout << "[5] - History                                               " << '\n';
-        std::cout << "[6] - Annual Analysis                                       " << '\n';
-        std::cout << "[7] - Back                                                  " << '\n';
-        int option = InputNumber("Option: ", 7, 1);
+        std::cout << "[0] - Overall                                               " << '\n';
+        std::cout << "[1] - Income Breakdown                                      " << '\n';
+        std::cout << "[2] - Expense Breakdown                                     " << '\n';
+        std::cout << "[3] - Wallet                                                " << '\n';
+        std::cout << "[4] - History                                               " << '\n';
+        std::cout << "[5] - Annual Analysis                                       " << '\n';
+        std::cout << "[6] - Back                                                  " << '\n';
+        int option = InputNumber("Option: ", 6, 0);
         Date bd = {0,0,0};
         Date kt = {INT_MAX, INT_MAX, INT_MAX};
         switch (option)
         {
-        case 1:{
+        case 0:{
             OverallPage(user, bd, kt);
             break;
         }
-        case 2:{
+        case 1:{
             IncomeBreakdown(user, bd, kt);
             break;
         }
-        case 3:{
+        case 2:{
             ExpenseBreakdown(user, bd, kt);
             break;
         }
-        case 4:{
+        case 3:{
             WalletStat(user, bd, kt, -1);
             break;
         }
-        case 5:{
+        case 4:{
             HistoryStat(user, bd, kt, -1);
             break;
         }
-        case 6:{
+        case 5:{
             MyVector<Date> temp;
             AnnualAnalysis(user, temp);
             break;
         }
-        case 7:{
-            t = 0;
+        case 6:{
+            return;
             break;
         }
         default:{
@@ -101,6 +101,11 @@ void OverallPage(User &user, Date &bd, Date &kt){
             Date bg = InputDate();
             std::cout << "Input ending date..." << '\n';
             Date ed = InputDate();
+            if (CompareDate(bg, ed) >= 0) {
+                std::cout << "Invalid Time Interval!" << '\n';
+                PauseScreen();
+                return;
+            }
             OverallPage(user, bg, ed);
             return;
             break;
@@ -164,6 +169,11 @@ void IncomeBreakdown (User &user, Date &bd, Date &kt){
             Date bg = InputDate();
             std::cout << "Input ending date..." << '\n';
             Date ed = InputDate();
+            if (CompareDate(bg, ed) >=0) {
+                std::cout << "Invalid Time Interval!" << '\n';
+                PauseScreen();
+                return;
+            }
             IncomeBreakdown(user, bg, ed);
             return;
             break;
@@ -229,6 +239,11 @@ void ExpenseBreakdown (User &user, Date &bd, Date &kt){
             Date bg = InputDate();
             std::cout << "Input ending date..." << '\n';
             Date ed = InputDate();
+            if (CompareDate(bg, ed) >=0){
+                std::cout << "Invalid Time Interval!" << '\n';
+                PauseScreen();
+                return;
+            }
             ExpenseBreakdown(user, bg, ed);
             return;
             break;
@@ -293,12 +308,9 @@ void WalletStat(User& user, Date &bd, Date &kt, int id){
         }
         else {
             Wallet displayWallet;
-            for (int i=0; i<user.walletList.size; ++i){
-                if (user.walletList[i].id == id){
-                    displayWallet = user.walletList[i];
-                    break;
-                }
-            }
+            int idx = SearchWalletID(user, id);
+            displayWallet = user.walletList[idx];
+            
             int income = 0;
             for (int i=0; i<user.incomeHistory.size; ++i){
                 if (user.incomeHistory[i].isDeleted == false && user.incomeHistory[i].idWallet == id){
@@ -330,6 +342,11 @@ void WalletStat(User& user, Date &bd, Date &kt, int id){
                 Date bg = InputDate();
                 std::cout << "Input ending date..." << '\n';
                 Date ed = InputDate();
+                if (CompareDate(bg, ed)>=0){
+                    std::cout << "Invalid Time Interval!" << '\n';
+                    PauseScreen();
+                    return;
+                }
                 WalletStat(user, bg, ed, id);
                 return;
                 break;
@@ -627,21 +644,15 @@ void showIncomeHistory (User &user, Date &bd, Date &kt) {
                 std::cout << "Message: " << show.message << '\n';
                 
                 Wallet wallet; 
-                for (int j=0; j<user.walletList.size; ++j) {
-                    if (user.walletList[j].id == show.idWallet){
-                        wallet = user.walletList[j];
-                        break;
-                    }
-                }
+                int idx = SearchWalletID(user, show.idWallet);
+                wallet = user.walletList[idx];
+
                 std::cout << "Wallet: " << wallet.name << '\n';
 
                 IncomeCategory inCat;
-                for (int j=0; j<user.incomeList.size; ++j) {
-                    if (user.incomeList[j].id == show.idCategory){
-                        inCat = user.incomeList[j];
-                        break;
-                    }
-                }
+                idx = SearchIncomeID(user, show.idCategory);
+                inCat = user.incomeList[idx];
+
                 std::cout << "Category: " << inCat.name << '\n';
 
                 std::cout << "Amount: " << FormatMoney(show.money) << '\n';
@@ -663,21 +674,15 @@ void showExpenseHistory (User &user, Date &bd, Date &kt) {
                 std::cout << "Message: " << show.message << '\n';
                 
                 Wallet wallet; 
-                for (int j=0; j<user.walletList.size; ++j) {
-                    if (user.walletList[j].id == show.idWallet){
-                        wallet = user.walletList[j];
-                        break;
-                    }
-                }
+                int idx = SearchWalletID(user, show.idWallet);
+                wallet = user.walletList[idx];
+
                 std::cout << "Wallet: " << wallet.name << '\n';
 
                 ExpenseCategory exCat;
-                for (int j=0; j<user.expenseList.size; ++j) {
-                    if (user.expenseList[j].id == show.idCategory){
-                        exCat = user.expenseList[j];
-                        break;
-                    }
-                }
+                idx = SearchExpenseID(user, show.idCategory);
+                exCat = user.expenseList[idx];
+                
                 std::cout << "Category: " << exCat.name << '\n';
 
                 std::cout << "Amount: " << FormatMoney(show.money) << '\n';

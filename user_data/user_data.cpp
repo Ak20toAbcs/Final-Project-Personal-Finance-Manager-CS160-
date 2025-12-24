@@ -32,44 +32,119 @@
     return { t->tm_mday, t->tm_mon + 1, t->tm_year + 1900 };
     }
 
-    MyVector <Wallet> SearchWallet (User &user, const char s[]){
-        MyVector <Wallet> result;
-        for (int i=0; i<user.walletList.size; ++i){
-            if (user.walletList[i].isDeleted == false && strstr(user.walletList[i].name, s)!=NULL){
-                result.push_back(user.walletList[i]);
+    // MyVector <Wallet> SearchWallet (User &user, const char s[]){
+    //     MyVector <Wallet> result;
+    //     for (int i=0; i<user.walletList.size; ++i){
+    //         if (user.walletList[i].isDeleted == false && strstr(user.walletList[i].name, s)!=NULL){
+    //             result.push_back(user.walletList[i]);
+    //         }
+    //     }
+    //     return result;
+    // }
+
+    // MyVector <IncomeCategory> SearchIncome (User &user, const char s[]){
+    //     MyVector <IncomeCategory> result;
+    //     for (int i=0; i<user.incomeList.size; ++i){
+    //         if (user.incomeList[i].isDeleted == false && strstr(user.incomeList[i].name, s)!=NULL){
+    //             result.push_back(user.incomeList[i]);
+    //         }
+    //     }
+    //     return result;
+    // }
+
+    // MyVector <ExpenseCategory> SearchExpense (User &user, const char s[]){
+    //     MyVector <ExpenseCategory> result;
+    //     for (int i=0; i<user.expenseList.size; ++i){
+    //         if (user.expenseList[i].isDeleted == false && strstr(user.expenseList[i].name, s)!=NULL){
+    //             result.push_back(user.expenseList[i]);
+    //         }
+    //     }
+    //     return result;
+    // }
+
+    // MyVector <RecurringCategory> SearchRecur (User &user, const char s[]){
+    //     MyVector <RecurringCategory> result;
+    //     for (int i=0; i<user.recurList.size; ++i){
+    //         if (user.recurList[i].isDeleted == false && strstr(user.recurList[i].message, s)!=NULL){
+    //             result.push_back(user.recurList[i]);
+    //         }
+    //     }
+    //     return result;
+    // }
+
+    int SearchWalletID (User &user, int id) {
+        int l = 0; int r = user.walletList.size-1;
+        while (l<=r) {
+            if (l==r) {
+                if (user.walletList[l].id == id) return l;
+                else return -1;
+            }
+            int m = (l+r)/2;
+            if (user.walletList[m].id == id) return m;
+            if (user.walletList[m].id > id) {
+                r = m-1;
+            }
+            if (user.walletList[m].id < id){
+                l = m+1;
             }
         }
-        return result;
+        return -1;
+    }
+    int SearchIncomeID (User &user, int id) {
+        int l = 0; int r = user.incomeList.size-1;
+        while (l<=r) {
+            if (l==r) {
+                if (user.incomeList[l].id == id) return l;
+                else return -1;
+            }
+            int m = (l+r)/2;
+            if (user.incomeList[m].id == id) return m;
+            if (user.incomeList[m].id > id) {
+                r = m-1;
+            }
+            if (user.incomeList[m].id < id){
+                l = m+1;
+            }
+        }
+        return -1;
     }
 
-    MyVector <IncomeCategory> SearchIncome (User &user, const char s[]){
-        MyVector <IncomeCategory> result;
-        for (int i=0; i<user.incomeList.size; ++i){
-            if (user.incomeList[i].isDeleted == false && strstr(user.incomeList[i].name, s)!=NULL){
-                result.push_back(user.incomeList[i]);
+    int SearchExpenseID (User &user, int id) {
+        int l = 0; int r = user.expenseList.size-1;
+        while (l<=r) {
+            if (l==r) {
+                if (user.expenseList[l].id == id) return l;
+                else return -1;
+            }
+            int m = (l+r)/2;
+            if (user.expenseList[m].id == id) return m;
+            if (user.expenseList[m].id > id) {
+                r = m-1;
+            }
+            if (user.expenseList[m].id < id){
+                l = m+1;
             }
         }
-        return result;
+        return -1;
     }
 
-    MyVector <ExpenseCategory> SearchExpense (User &user, const char s[]){
-        MyVector <ExpenseCategory> result;
-        for (int i=0; i<user.expenseList.size; ++i){
-            if (user.expenseList[i].isDeleted == false && strstr(user.expenseList[i].name, s)!=NULL){
-                result.push_back(user.expenseList[i]);
+    int SearchRecurID (User &user, int id) {
+        int l = 0; int r = user.recurList.size-1;
+        while (l<=r) {
+            if (l==r) {
+                if (user.recurList[l].id == id) return l;
+                else return -1;
+            }
+            int m = (l+r)/2;
+            if (user.recurList[m].id == id) return m;
+            if (user.recurList[m].id > id) {
+                r = m-1;
+            }
+            if (user.recurList[m].id < id){
+                l = m+1;
             }
         }
-        return result;
-    }
-
-    MyVector <RecurringCategory> SearchRecur (User &user, const char s[]){
-        MyVector <RecurringCategory> result;
-        for (int i=0; i<user.recurList.size; ++i){
-            if (user.recurList[i].isDeleted == false && strstr(user.recurList[i].name, s)!=NULL){
-                result.push_back(user.recurList[i]);
-            }
-        }
-        return result;
+        return -1;
     }
 
     int CompareDate(const Date&a, const Date&b){

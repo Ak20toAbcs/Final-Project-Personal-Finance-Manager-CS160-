@@ -35,7 +35,7 @@ void SettingPage(User& user) {
             break;
         }
         case 4:{
-            t = 0;
+            return;
             break;
         }
         default:
@@ -58,13 +58,16 @@ void EditUsernamePage(User& user) {
         case 0:{
             std::cout << "Current username: " << user.userName << '\n';
             std::cout << "New Username: ";
-            std::cin.getline(user.userName, sizeof(user.userName));
+            std::string s; 
+            std::getline(std::cin, s);
+            strncpy(user.userName, s.c_str(), 50);
+            user.userName[50] = '\0';
             std::cout << "Create sucessful !" << '\n';
             PauseScreen();
             break;
         }
         case 1:{
-            t = 0;
+            return;
             break;
         }
         default:
@@ -94,7 +97,7 @@ void EditWalletPage(User& user) {
             break;
         }
         case 2:{
-            t = 0;
+            return;
             break;
         }
         default:
@@ -153,17 +156,11 @@ void EditListWallet(User &user) {
             }
 }
 
-bool EditWallet(User &user, int walletId) {
-    int idx = -1;
-    for(int i = 0; i < user.walletList.size; ++i) {
-        if(user.walletList[i].id == walletId) {
-            idx = i;
-            break;
-        }
-    }
+void EditWallet(User &user, int walletId) {
+    int idx = SearchWalletID(user, walletId);
 
     if(idx == -1){
-        return false;
+        return;
     }
 
     bool t = true;
@@ -179,7 +176,10 @@ bool EditWallet(User &user, int walletId) {
         {
         case 0:{
             std::cout << "Create new name for wallet: ";
-            std::cin.getline(user.walletList[idx].name, sizeof(user.walletList[idx].name));
+            std::string s; 
+            std::getline(std::cin, s);
+            strncpy(user.walletList[idx].name, s.c_str(), 50);
+            user.walletList[idx].name[50] = '\0';
             std::cout << "Sucessful !" << '\n';
             PauseScreen();
             break;
@@ -191,37 +191,33 @@ bool EditWallet(User &user, int walletId) {
                 user.walletList[idx].isDeleted = true;
                 std::cout << "Sucessful !" << '\n';
                 PauseScreen();
-                return true;
+                return;
             }
             break;
         }
         case 2:{
-            return false;
+            return;
             break;
         }
         default:
             break;
         }
     }
-    return true;
+    return;
 }
 
 void AddWallet(User &user) {
     std::cout << "+----------------------Add Wallet-------------------------+" << '\n';
 
     Wallet newWallet;
-    char tempName[100];
-    
-    std::cout << "Name of Wallet is: ";
-    std::cin.getline(tempName, 51);
-    strncpy(newWallet.name, tempName, sizeof(newWallet.name)-1);
-    newWallet.name[sizeof(newWallet.name) - 1] = '\0';
 
-    int maxId = 0;
-    for(int i = 0; i < user.walletList.size; ++i) {
-        if(user.walletList[i].id > maxId) maxId = user.walletList[i].id;
-    }
-    newWallet.id = maxId + 1;
+    std::cout << "Name of Wallet is: ";
+    std::string s; 
+    std::getline(std::cin, s);
+    strncpy(newWallet.name, s.c_str(), 50);
+    newWallet.name[50] = '\0';
+
+    newWallet.id = user.nextWallet_id++;
     newWallet.isDeleted = false;
 
     user.walletList.push_back(newWallet);
@@ -327,18 +323,14 @@ void AddIncomeCat(User &user) {
     std::cout << "+------------------Add Income Category---------------------+" << '\n';
 
     IncomeCategory newCat;
-    char tempName[100];
     
     std::cout << "Name of Category is: ";
-    std::cin.getline(tempName, 51);
-    strncpy(newCat.name, tempName, sizeof(newCat.name)-1);
-    newCat.name[sizeof(newCat.name) - 1] = '\0';
+    std::string s; 
+    std::getline(std::cin, s);
+    strncpy(newCat.name, s.c_str(), 50);
+    newCat.name[50] = '\0';
 
-    int maxId = 0;
-    for(int i = 0; i < user.incomeList.size; ++i) {
-        if(user.incomeList[i].id > maxId) maxId = user.incomeList[i].id;
-    }
-    newCat.id = maxId + 1;
+    newCat.id = user.nextIncome_id++;
 
     user.incomeList.push_back(newCat);
 
@@ -350,18 +342,14 @@ void AddExpenseCat(User &user) {
     std::cout << "+------------------Add Expense Category--------------------+" << '\n';
 
     ExpenseCategory newCat;
-    char tempName[100];
     
     std::cout << "Name of Category is: ";
-    std::cin.getline(tempName, 51);
-    strncpy(newCat.name, tempName, sizeof(newCat.name)-1);
-    newCat.name[sizeof(newCat.name) - 1] = '\0';
+    std::string s; 
+    std::getline(std::cin, s);
+    strncpy(newCat.name, s.c_str(), 50);
+    newCat.name[50] = '\0';
 
-    int maxId = 0;
-    for(int i = 0; i < user.expenseList.size; ++i) {
-        if(user.expenseList[i].id > maxId) maxId = user.expenseList[i].id;
-    }
-    newCat.id = maxId + 1;
+    newCat.id = user.nextExpense_id++;
 
     user.expenseList.push_back(newCat);
 
@@ -408,21 +396,15 @@ void ShowInCat (User &user) {
     }
 }
 
-bool EditIn(User &user, int idCat) {
+void EditIn(User &user, int idCat) {
     bool t = true;
     while (t){
         ClearScreen();
         std::cout << borderLine << '\n';
         std::cout << "+------------------Income Category Page--------------------+" << '\n';
-        int idx = -1;
-        for (int i=0; i<user.incomeList.size; ++i){
-            if (user.incomeList[i].id == idCat) {
-                idx = i;
-                break;
-            }
-        }
+        int idx = SearchIncomeID(user, idCat);
 
-        if (idx == -1) return false;
+        if (idx == -1) return;
         std::cout << "Category: " << user.incomeList[idx].name << '\n';
         std::cout << "[0] - Edit name" << '\n';
         std::cout << "[1] - Delete category" << '\n';
@@ -432,7 +414,11 @@ bool EditIn(User &user, int idCat) {
         {
         case 0:{
             std::cout << "Create new name for category: ";
-            std::cin.getline(user.incomeList[idx].name, sizeof(user.incomeList[idx].name));
+            std::string s; 
+            std::getline(std::cin, s);
+            strncpy(user.incomeList[idx].name, s.c_str(), 50);
+            user.incomeList[idx].name[50] = '\0';
+
             std::cout << "Sucessful !" << '\n';
             PauseScreen();
             break;
@@ -444,12 +430,12 @@ bool EditIn(User &user, int idCat) {
                 user.incomeList[idx].isDeleted = true;
                 std::cout << "Sucessful !" << '\n';
                 PauseScreen();
-                return true;
+                return;
             }
             break;
         }
         case 2:{
-            return false;
+            return;
             break;
         }
         default:
@@ -497,21 +483,15 @@ void ShowExCat (User &user) {
     }
 }
 
-bool EditEx(User &user, int idCat) {
+void EditEx(User &user, int idCat) {
     bool t = true;
     while (t){
         ClearScreen();
         std::cout << borderLine << '\n';
         std::cout << "+------------------Expense Category Page-------------------+" << '\n';
-        int idx = -1;
-        for (int i=0; i<user.expenseList.size; ++i){
-            if (user.expenseList[i].id == idCat) {
-                idx = i;
-                break;
-            }
-        }
+        int idx = SearchExpenseID(user, idCat);
 
-        if (idx == -1) return false;
+        if (idx == -1) return;
         std::cout << "Category: " << user.expenseList[idx].name << '\n';
         std::cout << "[0] - Edit name" << '\n';
         std::cout << "[1] - Delete category" << '\n';
@@ -521,7 +501,10 @@ bool EditEx(User &user, int idCat) {
         {
         case 0:{
             std::cout << "Create new name for category: ";
-            std::cin.getline(user.expenseList[idx].name, sizeof(user.expenseList[idx].name));
+            std::string s; 
+            std::getline(std::cin, s);
+            strncpy(user.expenseList[idx].name, s.c_str(), 50);
+            user.expenseList[idx].name[50] = '\0';
             std::cout << "Sucessful !" << '\n';
             PauseScreen();
             break;
@@ -533,12 +516,12 @@ bool EditEx(User &user, int idCat) {
                 user.expenseList[idx].isDeleted = true;
                 std::cout << "Sucessful !" << '\n';
                 PauseScreen();
-                return true;
+                return;
             }
             break;
         }
         case 2:{
-            return false;
+            return;
             break;
         }
         default:

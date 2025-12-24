@@ -19,6 +19,7 @@ file(GLOB_RECURSE SOURCES
     "transaction/*.cpp"
     "statistic/*.cpp"
     "setting/*.cpp"
+    "recurring/*.cpp"
 )
 
 # 3. Thêm đường dẫn folder chứa file Header (.h)
@@ -33,6 +34,8 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/transaction
     ${CMAKE_SOURCE_DIR}/statistic
     ${CMAKE_SOURCE_DIR}/setting
+    ${CMAKE_SOURCE_DIR}/recurring
+
 
 )
 

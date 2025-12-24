@@ -4,6 +4,7 @@
 #include "transaction.h"
 #include "statistic.h"
 #include "setting.h"
+#include "recurring.h"
 #include <iomanip>
 
 
@@ -16,7 +17,7 @@ void DisplayMoney (User &user){
     for (int i=0; i<user.walletList.size; ++i){
         if (!user.walletList[i].isDeleted){
            displayList.push_back(user.walletList[i]); 
-           sum+=displayList[i].money;
+           sum+=user.walletList[i].money;
         }
         
     }
@@ -62,7 +63,7 @@ void MenuPage(User &user){
                 break;
             }
             case 3:{
-                // RecurringPage();
+                RecurringPage(user);
                 break;
             }
             case 4:{
