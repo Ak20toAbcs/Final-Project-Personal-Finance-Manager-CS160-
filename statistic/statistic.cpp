@@ -633,7 +633,7 @@ void ExpenseAnnual(User& user, MyVector<Date> &listYear){
 }
 
 void showIncomeHistory (User &user, Date &bd, Date &kt) {
-        std::cout << "+------Income History: " << '\n';
+        std::cout << "+----------------------Income History----------------------+" << '\n';
         for (int i=0; i<user.incomeHistory.size; ++i){
             Date temp = user.incomeHistory[i].date;
             if (CompareDate(temp, bd) <0 || CompareDate(temp, kt) >0) continue;
@@ -664,7 +664,7 @@ void showIncomeHistory (User &user, Date &bd, Date &kt) {
 }
 
 void showExpenseHistory (User &user, Date &bd, Date &kt) {
-        std::cout << "+------Expense History: " << '\n';
+        std::cout << "+----------------------Expense History---------------------+" << '\n';
         for (int i=0; i<user.expenseHistory.size; ++i){
             Date temp = user.expenseHistory[i].date;
             if (CompareDate(temp, bd) <0 || CompareDate(temp, kt) >0) continue;
