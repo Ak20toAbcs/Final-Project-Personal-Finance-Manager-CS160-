@@ -388,7 +388,8 @@ void EditCat(User &user, int catId){
 void LoadRecur(User &user){
     Date curDate = GetCurrentDate();
     for (int i=0; i<user.recurList.size; ++i){
-        if (!user.recurList[i].isDeleted) {
+        if (!user.recurList[i].isDeleted && CompareDate(curDate, user.recurList[i].starting) >= 0
+        && CompareDate(curDate, user.recurList[i].ending) <=0) {
             Date lastCheck = user.recurList[i].lastUpdate;
             if (curDate.month == lastCheck.month && curDate.year == lastCheck.year) {
                 continue;
