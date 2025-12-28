@@ -18,6 +18,7 @@ void StatisticPage(User &user){
         std::cout << "[5] - Annual Analysis                                       " << '\n';
         std::cout << "[6] - Back                                                  " << '\n';
         int option = InputNumber("Option: ", 6, 0);
+        std::cout << '\n';
         Date bd = {0,0,0};
         Date kt = {INT_MAX, INT_MAX, INT_MAX};
         switch (option)
@@ -94,13 +95,16 @@ void OverallPage(User &user, Date &bd, Date &kt){
         std::cout << "[0] - Choose specific time" << '\n';
         std::cout << "[1] - Back" << '\n';
         int option = InputNumber("Option: ", 1, 0);
+        std::cout << '\n';
         switch (option)
         {
         case 0:{
             std::cout << "Input starting date..." << '\n';
             Date bg = InputDate();
+            std::cout << '\n';
             std::cout << "Input ending date..." << '\n';
             Date ed = InputDate();
+            std::cout << '\n';
             if (CompareDate(bg, ed) >= 0) {
                 std::cout << "Invalid Time Interval!" << '\n';
                 PauseScreen();
@@ -162,13 +166,16 @@ void IncomeBreakdown (User &user, Date &bd, Date &kt){
         std::cout << "[0] - Choose specific time" << '\n';
         std::cout << "[1] - Back                " << '\n';
         int option = InputNumber("Option: ", 1, 0);
+        std::cout << '\n';
         switch (option)
         {
         case 0:{
             std::cout << "Input starting date..." << '\n';
             Date bg = InputDate();
+            std::cout << '\n';
             std::cout << "Input ending date..." << '\n';
             Date ed = InputDate();
+            std::cout << '\n';
             if (CompareDate(bg, ed) >=0) {
                 std::cout << "Invalid Time Interval!" << '\n';
                 PauseScreen();
@@ -232,13 +239,16 @@ void ExpenseBreakdown (User &user, Date &bd, Date &kt){
         std::cout << "[0] - Choose specific time" << '\n';
         std::cout << "[1] - Back                " << '\n';
         int option = InputNumber("Option: ", 1, 0);
+        std::cout << '\n';
         switch (option)
         {
         case 0:{
             std::cout << "Input starting date..." << '\n';
             Date bg = InputDate();
+            std::cout << '\n';
             std::cout << "Input ending date..." << '\n';
             Date ed = InputDate();
+            std::cout << '\n';
             if (CompareDate(bg, ed) >=0){
                 std::cout << "Invalid Time Interval!" << '\n';
                 PauseScreen();
@@ -301,7 +311,7 @@ void WalletStat(User& user, Date &bd, Date &kt, int id){
             std::cout << "Back" << "\n";
 
             int option = InputNumber("Option: ", displayList.size, 0);
-
+            std::cout << '\n';
             if (option  == displayList.size) return;
             else {
                 WalletStat(user, bd, kt, displayList[option].id);
@@ -336,13 +346,16 @@ void WalletStat(User& user, Date &bd, Date &kt, int id){
             std::cout << "[0] - Choose specific time" << '\n';
             std::cout << "[1] - Back" << '\n';
             int option = InputNumber("Option: ", 1, 0);
+            std::cout << '\n';
             switch (option)
             {
             case 0:{
                 std::cout << "Input starting date..." << '\n';
                 Date bg = InputDate();
+                std::cout << '\n';
                 std::cout << "Input ending date..." << '\n';
                 Date ed = InputDate();
+                std::cout << '\n';
                 if (CompareDate(bg, ed)>=0){
                     std::cout << "Invalid Time Interval!" << '\n';
                     PauseScreen();
@@ -386,6 +399,7 @@ void HistoryStat(User& user, Date &bd, Date &kt, int state) {
             std::cout << "[2] - Expense History" << '\n';
             std::cout << "[3] - Back" << '\n';
             int option = InputNumber("Option: ", 3, 0);
+            std::cout << '\n';
             switch (option)
             {
             case 0: {
@@ -413,18 +427,21 @@ void HistoryStat(User& user, Date &bd, Date &kt, int state) {
             showExpenseHistory(user, bd, kt);
             std::cout << "[0] - Back" << '\n';
             int option = InputNumber("Option: ", 0, 0);
+            std::cout << '\n';
             return;
         }
         if (state == 1){
             showIncomeHistory(user, bd, kt);
             std::cout << "[0] - Back" << '\n';
             int option = InputNumber("Option: ", 0, 0);
+            std::cout << '\n';
             return;
         }
         if (state == 2){
             showExpenseHistory(user, bd, kt);
             std::cout << "[0] - Back" << '\n';
             int option = InputNumber("Option: ", 0, 0);
+            std::cout << '\n';
             return;
         }
     } 
@@ -442,6 +459,7 @@ void AnnualAnalysis(User &user, MyVector<Date> &listYear){
             std::cout << "[2] - Expense" << '\n';
             std::cout << "[3] - Back" << '\n';
             int option = InputNumber("Option: ", 3, 0);
+            std::cout << '\n';
             switch (option)
             {
             case 0:{
@@ -477,12 +495,15 @@ void NetAnnual(User &user, MyVector<Date> &listYear) {
             std::cout << "[0] - Choose years to analyze" << '\n';
             std::cout << "[1] - Back" << '\n';
             int option = InputNumber("Option: ", 1, 0);
+            std::cout << '\n';
             if (option == 1) return;
             MyVector<Date> inputYear;
             int n = InputNumber("Choose the number of years to analyze (max - 1000): ", 1000, 1);
+            std::cout << '\n';
             for (int i=1; i<=n; ++i){
                 std::cout << "Enter year " << i << '\n';
                 int year = InputNumber("Year: ", INT_MAX, 1);
+                std::cout << '\n';
                 inputYear.push_back({0, 0, year});
             } 
             NetAnnual(user, inputYear);
@@ -509,6 +530,7 @@ void NetAnnual(User &user, MyVector<Date> &listYear) {
             }
             std::cout << "[0] - Back" <<'\n';
             int option = InputNumber("Option: ", 0, 0);
+            std::cout << '\n';
             if (option == 0) return;
         } 
     }
@@ -525,12 +547,15 @@ void IncomeAnnual(User &user, MyVector<Date> &listYear){
             std::cout << "[0] - Choose years to analyze" << '\n';
             std::cout << "[1] - Back" << '\n';
             int option = InputNumber("Option: ", 1, 0);
+            std::cout << '\n';
             if (option == 1) return;
             MyVector<Date> inputYear;
             int n = InputNumber("Choose the number of years to analyze (max - 1000): ", 1000, 1);
+            std::cout << '\n';
             for (int i=1; i<=n; ++i){
                 std::cout << "Enter year " << i << '\n';
                 int year = InputNumber("Year: ", INT_MAX, 1);
+                std::cout << '\n';
                 inputYear.push_back({0, 0, year});
             } 
             IncomeAnnual(user, inputYear);
@@ -568,6 +593,7 @@ void IncomeAnnual(User &user, MyVector<Date> &listYear){
             }
             std::cout << "[0] - Back" <<'\n';
             int option = InputNumber("Option: ", 0, 0);
+            std::cout << '\n';
             if (option == 0) return;
         } 
     }
@@ -584,12 +610,15 @@ void ExpenseAnnual(User& user, MyVector<Date> &listYear){
             std::cout << "[0] - Choose years to analyze" << '\n';
             std::cout << "[1] - Back" << '\n';
             int option = InputNumber("Option: ", 1, 0);
+            std::cout << '\n';
             if (option == 1) return;
             MyVector<Date> inputYear;
             int n = InputNumber("Choose the number of years to analyze (max - 1000): ", 1000, 1);
+            std::cout << '\n';
             for (int i=1; i<=n; ++i){
                 std::cout << "Enter year " << i << '\n';
                 int year = InputNumber("Year: ", INT_MAX, 1);
+                std::cout << '\n';
                 inputYear.push_back({0, 0, year});
             } 
             ExpenseAnnual(user, inputYear);
@@ -627,6 +656,7 @@ void ExpenseAnnual(User& user, MyVector<Date> &listYear){
             }
             std::cout << "[0] - Back" <<'\n';
             int option = InputNumber("Option: ", 0, 0);
+            std::cout << '\n';
             if (option == 0) return;
         } 
     }

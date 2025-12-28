@@ -13,6 +13,7 @@ void TransactionPage(User &user){
         std::cout << "[1] - Add Expense                                           " << '\n';
         std::cout << "[2] - Back                                                  " << '\n';
         int option = InputNumber("Option: ", 2, 0);
+        std::cout << '\n';
         switch (option)
         {
         case 0:{
@@ -72,7 +73,7 @@ bool IncomePage(User &user){
             std::cout << "Back";
             std::cout << '\n';
         int option_wallet = InputNumber("Option: ", displayList.size, 0);
-
+        std::cout << '\n';
         if (option_wallet == displayList.size) return false;
 
         std::cout << '\n';
@@ -109,13 +110,13 @@ bool IncomePage(User &user){
             std::cout << "Back";
             std::cout << '\n';
         int option_cat = InputNumber("Option: ", incomeList.size, 0);
-
+        std::cout << '\n';
         if (option_cat == incomeList.size) continue;
 
         std::cout << '\n';
 
         int amount = InputNumber("Choose amount: ", INT_MAX, 0);
-        
+        std::cout << '\n';
         std::cout << '\n';
         std::cout << "Write message: ";
         std::string s; 
@@ -129,15 +130,16 @@ bool IncomePage(User &user){
         << date.day << "/" << date.month << "/" << date.year 
         << ")? (y-YES / n-No): ";
         char option_date = InputYesNo();
-
+        std::cout << '\n';
         if (option_date == 'n') {
             date = InputDate();
+            std::cout << '\n';
         }
 
         AddIncome(user, displayList[option_wallet].id, incomeList[option_cat].id, amount, s, date);
 
         std::cout << '\n';
-        std::cout << "Successful!" << '\n';
+        std::cout << "                         Successful!                        " << '\n';
         PauseScreen();
         return true;
     }
@@ -181,7 +183,7 @@ bool ExpensePage(User &user){
             std::cout << '\n';
         
         int option_wallet = InputNumber("Option: ", displayList.size, 0);
-
+        std::cout << '\n';
         if (option_wallet == displayList.size) return false;
 
         std::cout << '\n';
@@ -219,13 +221,12 @@ bool ExpensePage(User &user){
             std::cout << '\n';
         
         int option_cat = InputNumber("Option: ", expenseList.size, 0);
-
+        std::cout << '\n';
         if (option_cat == expenseList.size) return false;
 
         std::cout << '\n';
         
         int amount = InputNumber("Choose amount: ", INT_MAX, 0);
-        
         std::cout << '\n';
         std::cout << "Write message: ";
         std::string s; 
@@ -239,15 +240,16 @@ bool ExpensePage(User &user){
         << date.day << "/" << date.month << "/" << date.year 
         << ")? (y-YES / n-No): ";
         char option_date = InputYesNo();
-
+        std::cout << '\n';
         if (option_date == 'n') {
             date = InputDate();
+            std::cout << '\n';
         }
 
         AddExpense(user, displayList[option_wallet].id, expenseList[option_cat].id, amount, s, date);
 
         std::cout << '\n';
-        std::cout << "Successful!" << '\n';
+        std::cout << "                         Successful!                        " << '\n';
         PauseScreen();
         return true;
     }

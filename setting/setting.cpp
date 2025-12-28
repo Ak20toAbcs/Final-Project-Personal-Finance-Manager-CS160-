@@ -16,6 +16,7 @@ void SettingPage(User& user) {
         std::cout << "[3] - Edit Expense Category                                 " << '\n';
         std::cout << "[4] - Back                                                  " << '\n';
         int option = InputNumber("Option: ", 4, 0);
+        std::cout << '\n';
         switch (option)
         {
         case 0:{
@@ -53,6 +54,7 @@ void EditUsernamePage(User& user) {
         std::cout << "[0] - Edit Name                                             " << '\n';
         std::cout << "[1] - Back                                                  " << '\n';
         int option = InputNumber("Option: ", 1, 0);
+        std::cout << '\n';
         switch (option)
         {
         case 0:{
@@ -62,7 +64,8 @@ void EditUsernamePage(User& user) {
             std::getline(std::cin, s);
             strncpy(user.userName, s.c_str(), 50);
             user.userName[50] = '\0';
-            std::cout << "Create sucessful !" << '\n';
+            std::cout << '\n';
+            std::cout << "Create successful !" << '\n';
             PauseScreen();
             break;
         }
@@ -86,6 +89,7 @@ void EditWalletPage(User& user) {
         std::cout << "[1] - Add Wallet                                            " << '\n';
         std::cout << "[2] - Back                                                  " << '\n';
         int option = InputNumber("Option: ", 2, 0);
+        std::cout << '\n';
         switch (option)
         {
         case 0:{
@@ -147,7 +151,7 @@ void EditListWallet(User &user) {
                 std::cout << "Back";
                 std::cout << '\n';
             int option_wallet = InputNumber("Option: ", displayList.size, 0);
-
+            std::cout << '\n';
             if (option_wallet == displayList.size) {
                 return;
             }
@@ -172,6 +176,7 @@ void EditWallet(User &user, int walletId) {
         std::cout << "[1] - Delete Wallet                                         " << '\n';
         std::cout << "[2] - Back                                                  " << '\n';
         int option = InputNumber("Option: ", 2, 0);
+        std::cout << '\n';
         switch (option)
         {
         case 0:{
@@ -180,16 +185,19 @@ void EditWallet(User &user, int walletId) {
             std::getline(std::cin, s);
             strncpy(user.walletList[idx].name, s.c_str(), 50);
             user.walletList[idx].name[50] = '\0';
-            std::cout << "Sucessful !" << '\n';
+            std::cout << '\n';
+            std::cout << "Successful !" << '\n';
             PauseScreen();
             break;
         }
         case 1:{
             std::cout << "Are you sure ? (y - Yes / n -  No): ";
             char confirm = InputYesNo();
+            std::cout << '\n';
             if (confirm == 'y') {
                 user.walletList[idx].isDeleted = true;
-                std::cout << "Sucessful !" << '\n';
+                std::cout << '\n';
+                std::cout << "Successful !" << '\n';
                 PauseScreen();
                 return;
             }
@@ -223,7 +231,7 @@ void AddWallet(User &user) {
     user.walletList.push_back(newWallet);
 
     std::cout << '\n';
-    std::cout << "Add Wallet sucessful !" << '\n';
+    std::cout << "Add Wallet successful !" << '\n';
     PauseScreen();
 }
 
@@ -239,6 +247,7 @@ void EditCategoryPage(User &user){
     std::cout << "[2] - Back" << '\n';
 
     int option = InputNumber("Option: ", 2, 0);
+    std::cout << '\n';
     switch (option)
     {
     case 0:{
@@ -269,6 +278,7 @@ void EditIncomeCategory(User& user) {
         std::cout << "[1] - Add Income category" << '\n';
         std::cout << "[2] - Back" << '\n';
         int option = InputNumber("Option: ", 2, 0);
+        std::cout << '\n';
         switch (option)
         {
         case 0:{
@@ -299,6 +309,7 @@ void EditExpenseCategory(User& user) {
         std::cout << "[1] - Add Expense category" << '\n';
         std::cout << "[2] - Back" << '\n';
         int option = InputNumber("Option: ", 2, 0);
+        std::cout << '\n';
         switch (option)
         {
         case 0:{
@@ -333,8 +344,8 @@ void AddIncomeCat(User &user) {
     newCat.id = user.nextIncome_id++;
 
     user.incomeList.push_back(newCat);
-
-    std::cout << "Add Category sucessful !" << '\n';
+    std::cout << '\n';
+    std::cout << "Add Category successful !" << '\n';
     PauseScreen();
 }
 
@@ -352,8 +363,8 @@ void AddExpenseCat(User &user) {
     newCat.id = user.nextExpense_id++;
 
     user.expenseList.push_back(newCat);
-
-    std::cout << "Add Category sucessful !" << '\n';
+    std::cout << '\n';
+    std::cout << "Add Category successful !" << '\n';
     PauseScreen();
 }
 
@@ -390,6 +401,7 @@ void ShowInCat (User &user) {
         std::cout << "Back" << '\n';
 
         int option = InputNumber("Option: ", displayList.size, 0);
+        std::cout << '\n';
 
         if (option == displayList.size) return;
         EditIn(user, displayList[option].id);
@@ -410,6 +422,8 @@ void EditIn(User &user, int idCat) {
         std::cout << "[1] - Delete category" << '\n';
         std::cout << "[2] - Back" << '\n';
         int option = InputNumber("Option: ", 2, 0);
+        std::cout << '\n';
+
         switch (option)
         {
         case 0:{
@@ -418,17 +432,20 @@ void EditIn(User &user, int idCat) {
             std::getline(std::cin, s);
             strncpy(user.incomeList[idx].name, s.c_str(), 50);
             user.incomeList[idx].name[50] = '\0';
-
-            std::cout << "Sucessful !" << '\n';
+            std::cout << '\n';
+            std::cout << "Successful !" << '\n';
             PauseScreen();
             break;
         }
         case 1:{
             std::cout << "Are you sure ? (y - Yes / n -  No): ";
             char confirm = InputYesNo();
+            std::cout << '\n';
+
             if (confirm == 'y') {
                 user.incomeList[idx].isDeleted = true;
-                std::cout << "Sucessful !" << '\n';
+                std::cout << '\n';
+                std::cout << "Successful !" << '\n';
                 PauseScreen();
                 return;
             }
@@ -477,6 +494,7 @@ void ShowExCat (User &user) {
         std::cout << "Back" << '\n';
 
         int option = InputNumber("Option: ", displayList.size, 0);
+        std::cout << '\n';
 
         if (option == displayList.size) return;
         EditEx(user, displayList[option].id);
@@ -497,6 +515,8 @@ void EditEx(User &user, int idCat) {
         std::cout << "[1] - Delete category" << '\n';
         std::cout << "[2] - Back" << '\n';
         int option = InputNumber("Option: ", 2, 0);
+        std::cout << '\n';
+
         switch (option)
         {
         case 0:{
@@ -505,16 +525,20 @@ void EditEx(User &user, int idCat) {
             std::getline(std::cin, s);
             strncpy(user.expenseList[idx].name, s.c_str(), 50);
             user.expenseList[idx].name[50] = '\0';
-            std::cout << "Sucessful !" << '\n';
+            std::cout << '\n';
+            std::cout << "Successful !" << '\n';
             PauseScreen();
             break;
         }
         case 1:{
             std::cout << "Are you sure ? (y - Yes / n -  No): ";
             char confirm = InputYesNo();
+            std::cout << '\n';
+
             if (confirm == 'y') {
                 user.expenseList[idx].isDeleted = true;
-                std::cout << "Sucessful !" << '\n';
+                std::cout << '\n';
+                std::cout << "Successful !" << '\n';
                 PauseScreen();
                 return;
             }

@@ -48,14 +48,15 @@ void AddRecurring(User &user) {
 
         std::cout << "Choose starting date" << '\n';
         Date st = InputDate();
+        std::cout << '\n';
         std::cout << "Choose ending date" << '\n';
         Date ed = InputDate();
+        std::cout << '\n';
         if (CompareDate(st, ed)>=0){
             std::cout << "Invalid Time Interval!" << '\n';
             PauseScreen();
             return;
         }
-        std::cout << '\n';
 
         MyVector<Wallet> displayList;
         for (int i=0; i<user.walletList.size; ++i){
@@ -122,7 +123,8 @@ void AddRecurring(User &user) {
                     newRecur.ending = ed;
                     newRecur.lastUpdate = {0, 0, 0};
                     user.recurList.push_back(newRecur);
-                    std::cout << "Add successful!" << '\n';
+                    std::cout << '\n';
+                    std::cout << "                     Add successful!                        " << '\n';
                     PauseScreen();
                     return;    
                 break;
@@ -168,7 +170,8 @@ void AddRecurring(User &user) {
                     newRecur.ending = ed;
                     newRecur.lastUpdate = {0, 0, 0};
                     user.recurList.push_back(newRecur);
-                    std::cout << "Add successful!" << '\n';
+                    std::cout << '\n';
+                    std::cout << "                     Add successful!                        " << '\n';
                     PauseScreen();
                     return;    
                 break;
@@ -206,6 +209,7 @@ void EditRecurring(User &user) {
                 std::cout << "Back" << '\n';
 
             int option_cat = InputNumber("Option: ", displayList.size, 0);
+            std::cout << '\n';
             if (option_cat == displayList.size) return;
             EditCat(user, displayList[option_cat].id);
     }
@@ -232,6 +236,7 @@ void EditCat(User &user, int catId){
         std::cout << "[4] - Delete" << '\n';
         std::cout << "[5] - Back" << '\n';
         int option = InputNumber("Option: ", 5, 0);
+        std::cout << '\n';
         if (option == 5) return;
 
 
@@ -242,10 +247,12 @@ void EditCat(User &user, int catId){
             std::cout << "Current amount: " << FormatMoney(user.recurList[idx].money) << '\n';
             std::cout << "Change amount? (y - YES / n - NO): ";
             char c = InputYesNo();
+            std::cout << '\n';
             if (c == 'y') {
                 int amount = InputNumber("Choose amount: ", INT_MAX, 0);
                 user.recurList[idx].money = amount;
-                std::cout << "Successful!" << '\n';
+                std::cout << '\n';
+                std::cout << "                         Successful!                        " << '\n';
                 PauseScreen();
             }
             break;
@@ -255,22 +262,25 @@ void EditCat(User &user, int catId){
             std::cout << "Current message: " << user.recurList[idx].message << '\n';
             std::cout << "Change message? (y - YES / n - NO): ";
             char c = InputYesNo();
+            std::cout << '\n';
             if (c == 'y') {
                 std::cout << "Choose message: ";
                 std::string s;
                 std::getline(std::cin, s);
                 strncpy(user.recurList[idx].message, s.c_str(), 100);
-                user.recurList[idx].message[100] = '\0';           
-                std::cout << "Successful!" << '\n';
+                user.recurList[idx].message[100] = '\0';     
+                std::cout << '\n';      
+                std::cout << "                         Successful!                        " << '\n';
                 PauseScreen();
             }
             break;
         }
         case 2:{
             std::cout << borderLine << '\n';
-            std::cout << "Current wallet: " << user.walletList[SearchWalletID(user, user.recurList[idx].walletId)].name;
+            std::cout << "Current wallet: " << user.walletList[SearchWalletID(user, user.recurList[idx].walletId)].name << '\n';
             std::cout << "Change wallet? (y - YES / n - NO): ";
             char c = InputYesNo();
+            std::cout << '\n';
             if (c == 'y') {
                 MyVector <Wallet> displayList;
                 for (int i=0; i<user.walletList.size; ++i){
@@ -293,7 +303,8 @@ void EditCat(User &user, int catId){
                 int option = InputNumber("Option: ", displayList.size, 0);
                 if (option == displayList.size) break;
                 user.recurList[idx].walletId = displayList[option].id;
-                std::cout << "Successful!" << '\n';
+                std::cout << '\n';      
+                std::cout << "                         Successful!                        " << '\n';
                 PauseScreen();
             }
             break;
@@ -301,9 +312,10 @@ void EditCat(User &user, int catId){
         case 3:{
             std::cout << borderLine << '\n';
             if (user.recurList[idx].isExpense){
-            std::cout << "Current category: " << user.expenseList[SearchExpenseID(user, user.recurList[idx].exId)].name;
+            std::cout << "Current category: " << user.expenseList[SearchExpenseID(user, user.recurList[idx].exId)].name << '\n';
             std::cout << "Change category? (y - YES / n - NO): ";
             char c = InputYesNo();
+            std::cout << '\n';
             if (c == 'y') {
                 MyVector <ExpenseCategory> displayList;
 
@@ -328,14 +340,16 @@ void EditCat(User &user, int catId){
                 int option = InputNumber("Option: ", displayList.size, 0);
                 if (option == displayList.size) break;
                 user.recurList[idx].exId = displayList[option].id;
-                std::cout << "Successful!" << '\n';
+                std::cout << '\n';      
+                std::cout << "                         Successful!                        " << '\n';
                 PauseScreen();
             }
             }
             else {
-            std::cout << "Current category: " << user.incomeList[SearchIncomeID(user, user.recurList[idx].inId)].name;
+            std::cout << "Current category: " << user.incomeList[SearchIncomeID(user, user.recurList[idx].inId)].name << '\n';
             std::cout << "Change category? (y - YES / n - NO): ";
             char c = InputYesNo();
+            std::cout << '\n';
             if (c == 'y') {
                 MyVector <IncomeCategory> displayList;
 
@@ -361,7 +375,8 @@ void EditCat(User &user, int catId){
                 if (option == displayList.size) break;
                 int idx_cat = SearchIncomeID(user, displayList[option].id);
                 user.recurList[idx].inId = displayList[option].id;
-                std::cout << "Successful!" << '\n';
+                std::cout << '\n';      
+                std::cout << "                         Successful!                        " << '\n';
                 PauseScreen();
             }
             }
@@ -371,9 +386,11 @@ void EditCat(User &user, int catId){
             std::cout << borderLine << '\n';
             std::cout << "Are you sure to delete it (y - YES / n - NO): ";
             char c = InputYesNo();
+            std::cout << '\n';
             if (c=='y') {
                 user.recurList[idx].isDeleted = true;
-                std::cout << "Delete Successful!" << '\n';
+                std::cout << '\n';      
+                std::cout << "                     Delete Successful!                     " << '\n';
                 PauseScreen();
                 return;
             }
