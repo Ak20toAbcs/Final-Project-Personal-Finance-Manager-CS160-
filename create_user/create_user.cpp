@@ -200,5 +200,31 @@ void CreateUserPage(User &user) {
     return;
 }
 
+void AddDefault(User &user){
+    Wallet cashWallet;
+        cashWallet.id = user.nextWallet_id++;
+        cashWallet.isDeleted = false;
+        strncpy(cashWallet.name, "Cash", 50);
+        cashWallet.name[50] = '\0';
+        user.walletList.push_back(cashWallet);
+        Wallet bankWallet;
+        bankWallet.id = user.nextWallet_id++;
+        bankWallet.isDeleted = false;
+        strncpy(bankWallet.name, "Bank", 50);
+        bankWallet.name[50] = '\0';
+        user.walletList.push_back(bankWallet);
 
+        IncomeCategory defaultIn;
+        defaultIn.id = user.nextIncome_id++;
+        defaultIn.isDeleted = false;
+        strncpy(defaultIn.name, "Default", 50);
+        defaultIn.name[50] = '\0';
+        user.incomeList.push_back(defaultIn);
 
+        ExpenseCategory defaultEx;
+        defaultEx.id = user.nextExpense_id++;
+        defaultEx.isDeleted = false;
+        strncpy(defaultEx.name, "Default", 50);
+        defaultEx.name[50] = '\0';
+        user.expenseList.push_back(defaultEx);
+}

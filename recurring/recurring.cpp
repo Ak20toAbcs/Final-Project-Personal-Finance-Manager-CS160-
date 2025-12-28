@@ -124,7 +124,7 @@ void AddRecurring(User &user) {
                     newRecur.lastUpdate = {0, 0, 0};
                     user.recurList.push_back(newRecur);
                     std::cout << '\n';
-                    std::cout << "                     Add successful!                        " << '\n';
+                    std::cout << "          Add successful! Restart to apply changes          " << '\n';
                     PauseScreen();
                     return;    
                 break;

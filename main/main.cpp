@@ -9,6 +9,8 @@ int main(){
     User user;
     if (LoadUser(user) == false) {
         CreateUserPage(user);
+        AddDefault(user);
+
     }
     LoadRecur(user);
     DashBoard(user);
